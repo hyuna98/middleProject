@@ -1,0 +1,18 @@
+package kr.or.ddit.user.myCardInfo.dao;
+
+import java.util.List;
+
+import kr.or.ddit.user.downloadPayment.vo.UserDownloadPaymentVO;
+import kr.or.ddit.user.myCardInfo.vo.UserMyCardInfoVO;
+
+public interface IUserMyCardInfoDao {
+
+	public List<UserMyCardInfoVO> getMyCardList(String userId);
+
+	public int deleteMyCardInfo(String myCardNo);
+
+	public int insertMyCardInfo(UserMyCardInfoVO vo);
+
+	public int setRepreCard(UserMyCardInfoVO vo);
+
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="adminContent">
+	
+	
+	<insert id="insertContent" parameterClass="adminContentVO">
+		INSERT ALL
+  		  INTO CONTENT(VIDEO_SERNO, CONT_TITLE, CONT_CAST, CONT_RGS_DT, CONT_GENRE, CONT_TYPE, CONT_DIRECTOR, CONT_NATION, 
+  						CONT_RUNNING_TIME, CONT_MODIFIER, PRICE_RATING_ID, CONT_VIEWS, CONT_POSTER)
+               VALUES(0, #cont_title#, #cont_cast#, sysdate, #cont_genre#,'1', #cont_director#, #cont_nation#, 
+               			#cont_running_time#, 'admin', 'A' ,5000, #cont_poster#)
+		  INTO EPISODE VALUES(0, '0', #cont_title#, #ep_plot#)
+		  INTO VIDEO VALUES('con001',0,'0', #cont_title#, #video_file_save_path#, #cont_title#, #cont_title#)
+		  SELECT * 
+		    FROM DUAL
+	</insert>
+	
+	<update id="deleteContent" parameterClass="String">
+		DELETE FROM CONTENT
+ 		WHERE CONT_TITLE = #cont_title#
+	</update>
+	
+	<update id="deleteEpisode" parameterClass="String">
+		DELETE FROM EPISODE
+ 		WHERE CONT_TITLE = #cont_title#
+	</update>
+	
+	<update id="deleteVideo" parameterClass="String">
+		DELETE FROM VIDEO
+ 		WHERE CONT_TITLE = #cont_title#
+	</update>
+	
+	<update id="updateContent" parameterClass="adminContentVO">
+		UPDATE CONTENT
+   		   SET CONT_CAST = #cont_cast#,
+               CONT_MOD = SYSDATE,
+               CONT_DIRECTOR = #cont_director#,
+               PRICE_RATING_ID = #price_rating_id#,
+               CONT_POSTER = #cont_poster#
+         WHERE CONT_TITLE = #cont_title#
+	</update>
+	
+	<update id="updatePlot" parameterClass="adminContentVO">
+		UPDATE EPISODE
+		   SET EP_PLOT = #ep_plot#
+		 WHERE CONT_TITLE = #cont_title#
+	</update>
+	
+	<select id="getContent" parameterClass="String" resultClass="adminContentVO">
+		SELECT CONT_TITLE,
+			   CONT_CAST,
+			   CONT_MOD,
+			   CONT_GENRE,
+			   CONT_DIRECTOR,
+			   CONT_NATION,
+			   CONT_RUNNING_TIME,
+			   CONT_POSTER
+		  FROM CONTENT 
+		 WHERE CONT_TITLE = #cont_title#
+	</select>
+
+	
+</sqlMap>

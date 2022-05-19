@@ -1,0 +1,629 @@
+@charset "UTF-8";
+.contentsBox {
+  padding: 1em;
+}
+
+.contentsBox.addPadding {
+  padding: 2.2em 1em;
+}
+
+.table thead th {
+  padding: 0.6em;
+}
+
+.table tbody td {
+  padding: 0.6em;
+}
+
+.gridBox {
+  display: -ms-grid;
+  display: grid;
+  gap: 10px;
+  -ms-grid-columns: (minmax(250px, auto))[1];
+      grid-template-columns: repeat(1, minmax(250px, auto));
+  grid-auto-rows: 1fr;
+}
+
+.gridBox.maxCol3-colRatio-21 {
+  width: 100%;
+  max-width: 580px;
+}
+
+.monitoringContentsBox {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  padding: 10px;
+  border-radius: 1rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.monitoringContentsBox .monitoringTitle {
+  margin: 1rem 0;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.monitoringContentsBox.off:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -35%, 0);
+          transform: translate3d(-50%, -35%, 0);
+  width: 100%;
+  height: 70px;
+  background: url(../images/off.svg) center/contain no-repeat;
+  font-size: 3em;
+  opacity: 0.3;
+}
+
+.monitoringContentsBox.off .monitoringContent {
+  background-color: transparent;
+  color: #6c757d;
+  visibility: hidden;
+}
+
+.monitoringContentsBox.placeHolder::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  background: url(../images/lock.svg) center/76px no-repeat;
+  opacity: .5;
+}
+
+.datetime {
+  text-align: right;
+  font-size: 14px;
+  padding-top: 3px;
+}
+
+.currentChart {
+  display: block;
+}
+
+.currentChart.speedometer {
+  width: 100%;
+  height: 140px;
+  margin-bottom: 0.5em;
+}
+
+#pin {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-transform-origin: 256px 292px;
+          transform-origin: 256px 292px;
+}
+
+.monitoringContent {
+  margin-bottom: 10px;
+  padding: 1em;
+  border-radius: 1rem;
+  background-color: #fff;
+  color: #6c757d;
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
+}
+
+.monitoringContent:last-of-type {
+  margin-bottom: 0;
+}
+
+.monitoringContent.addLine {
+  padding: 1.7em 1em;
+}
+
+.monitoringContent.addLine .valueBox::before {
+  content: '';
+  display: block;
+  margin: 15px auto 20px;
+  width: 80%;
+  height: 2px;
+  background-color: #d6dbf1;
+}
+
+.monitoringContent.addLine .valueBox:first-of-type::before {
+  content: none;
+}
+
+.monitoringContent.addPadding {
+  padding: 42px 0;
+}
+
+.monitoringContent.hasChart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.monitoringContent.hasChart .valueBox {
+  padding: 1.8rem;
+  z-index: 1;
+}
+
+.monitoringContent.hasChart .valueBox .valueTitle::after {
+  content: '';
+  display: block;
+  margin: 16px auto 11px;
+  width: 100%;
+  height: 2px;
+  background-color: #d6dbf1;
+}
+
+.monitoringContent.hasChart .historyChart {
+  width: 300px;
+}
+
+.valueBox {
+  line-height: 1;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.valueBox .valueTitle {
+  margin-bottom: 10px;
+}
+
+.valueBox .number {
+  font-size: 3.5rem;
+  margin: -2px;
+}
+
+.valueBox .number:nth-of-type(2) {
+  font-size: 2.5rem;
+}
+
+.valueBox .number:nth-of-type(2)::before {
+  content: ".";
+}
+
+.valueBox .currentValue {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin-right: 1rem;
+  width: 20%;
+}
+
+.valueBox .currentValue h4 {
+  margin-bottom: 0.5em;
+  font-size: 14px;
+}
+
+.valueBox .currentValue span {
+  display: block;
+  padding: 0.5em;
+  border-radius: 3em;
+  background-color: #3b7ddd;
+  font-size: 20px;
+  color: #fff;
+}
+
+.valueBox .currentValue:last-child {
+  margin-right: 0;
+}
+
+.label:after {
+  font-size: 0.9rem;
+  padding-left: 2px;
+  vertical-align: center;
+}
+
+.label.value-time::after {
+  content: "(H)";
+}
+
+.label.value-watt::after {
+  content: "(W)";
+}
+
+.label.value-tem::after {
+  content: "(℃)";
+}
+
+.label.value-weight::after {
+  content: "(Kg)";
+}
+
+.label.value-kg::after {
+  content: "Kg";
+  font-size: 0.6em;
+}
+
+.label.value-per::after {
+  content: "%";
+}
+
+.label.value-percent::after {
+  content: "%";
+  font-size: 0.6em;
+}
+
+.label.value-amount::after {
+  display: inline-block;
+  content: "건";
+  padding-top: 0.3em;
+  padding-left: 0.3em;
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+
+.label.value-cnt::after {
+  display: inline-block;
+  content: "개";
+  padding-top: 0.3em;
+  padding-left: 0.3em;
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+
+.label.value-won::after {
+  display: inline-block;
+  content: "만원";
+  padding-top: 0.3em;
+  padding-left: 0.3em;
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+
+.label.value-won2::after {
+  display: inline-block;
+  content: "(만원)";
+  padding-top: 0.3em;
+  padding-left: 0.3em;
+  font-size: 0.5em;
+  vertical-align: middle;
+}
+
+.percentBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.percentBox .percentChart {
+  margin: .5em;
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.percentBox .percentChart svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.percentBox .percentChart text {
+  font-family: "RamaGothicM-Heavy", Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  fill: #1072b8;
+}
+
+.percentBox .percentChart path.color0 {
+  fill: #1072b8;
+}
+
+.percentBox .percentChart path.color1 {
+  fill: #35526b;
+}
+
+.percentBox .percentValueBox {
+  padding: 1em;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 60%;
+  max-width: 420px;
+}
+
+.percentBox .percentValueBox .currentInfoBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 10px;
+  margin-top: 15px;
+}
+
+.percentBox .percentValueBox .currentInfoBox .currentInfo {
+  text-align: left;
+}
+
+.percentBox .percentValueBox .currentInfoBox .currentInfo.right {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.percentBox .percentValueBox .currentInfoBox .currentInfo .title {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.percentBox .percentValueBox .currentInfoBox .currentInfo .date {
+  display: block;
+  padding-bottom: 4px;
+  text-indent: 10px;
+}
+
+.percentBox .percentValueBox .currentInfoBox .currentInfo .date::before {
+  content: '- ';
+}
+
+.totalProductChart {
+  overflow: hidden;
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 100%;
+  height: 420px;
+  border-radius: 1rem;
+  background: #fbfcee;
+}
+
+.totalProductChart .totalValue {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  z-index: 11;
+  text-align: center;
+  -webkit-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0);
+  color: white;
+  font-size: 6em;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-indent: 0.1em;
+}
+
+.totalProductChart:after {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(238, 136, 170, 0.7)), color-stop(80%, rgba(221, 238, 255, 0)), to(rgba(255, 255, 255, 0.5)));
+  background: linear-gradient(to top, rgba(238, 136, 170, 0.7), rgba(221, 238, 255, 0) 80%, rgba(255, 255, 255, 0.5));
+  z-index: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.historyChart {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 100%;
+  height: 320px;
+  background-color: #fff;
+}
+
+.historyChart .axis--x path {
+  display: none;
+}
+
+.historyChart .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.waveBox {
+  top: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.wave {
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  background: #0af;
+  width: 1200px;
+  padding-top: 1200px;
+  -webkit-transform-origin: 50% 48%;
+          transform-origin: 50% 48%;
+  border-radius: 43%;
+  -webkit-animation: drift 7s infinite linear;
+          animation: drift 7s infinite linear;
+}
+
+.wave.-three {
+  left: 55%;
+  -webkit-animation: drift 9s infinite linear;
+          animation: drift 9s infinite linear;
+}
+
+.wave.-two {
+  left: 45%;
+  -webkit-animation: drift 11s infinite linear;
+          animation: drift 11s infinite linear;
+  opacity: 0.4;
+}
+
+@-webkit-keyframes drift {
+  from {
+    -webkit-transform: translateX(-50%) rotate(0deg);
+            transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translateX(-50%) rotate(360deg);
+            transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes drift {
+  from {
+    -webkit-transform: translateX(-50%) rotate(0deg);
+            transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translateX(-50%) rotate(360deg);
+            transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contentsBox.half > * {
+    width: calc(50% + 0.5em);
+    margin-bottom: -.5em;
+  }
+  .gridBox.maxCol2 {
+    -ms-grid-columns: (minmax(400px, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+  .gridBox.maxCol3-rowRatio-21 {
+    -ms-grid-columns: 50% 50%;
+        grid-template-columns: 50% 50%;
+  }
+  .gridBox.maxCol3-colRatio-21 {
+    -ms-grid-columns: 50% 50%;
+        grid-template-columns: 50% 50%;
+  }
+  .gridBox.maxCol3-colRatio-21 .monitoringContentsBox:nth-child(1) {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+  }
+  .gridBox.maxCol4 {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+  .percentValueBox .currentValue span {
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .gridBox {
+    width: 100%;
+  }
+  .gridBox.maxCol2 {
+    -ms-grid-columns: (minmax(40%, 100%))[2];
+        grid-template-columns: repeat(2, minmax(40%, 100%));
+  }
+  .gridBox.maxCol3 {
+    -ms-grid-columns: (minmax(30%, 100%))[3];
+        grid-template-columns: repeat(3, minmax(30%, 100%));
+  }
+  .gridBox.maxCol3-rowRatio-21 {
+    -ms-grid-columns: (minmax(30%, 100%))[3];
+        grid-template-columns: repeat(3, minmax(30%, 100%));
+  }
+  .gridBox.maxCol3-rowRatio-21 .monitoringContentsBox:first-of-type {
+    grid-column: span 2;
+  }
+  .gridBox.maxCol3-colRatio-21 {
+    max-width: unset;
+    -ms-grid-columns: (minmax(30%, 100%))[3];
+        grid-template-columns: repeat(3, minmax(30%, 100%));
+  }
+  .gridBox.maxCol3-colRatio-21 .monitoringContentsBox:nth-child(1) {
+    -ms-grid-column: 1;
+    grid-column: 1;
+  }
+  .gridBox.maxCol3-colRatio-21 .monitoringContentsBox:nth-child(2) {
+    -ms-grid-column: 2;
+    grid-column: 2;
+    -ms-grid-row: 1;
+    grid-row: 1;
+  }
+  .gridBox.maxCol3-colRatio-21 .monitoringContentsBox:nth-child(3) {
+    -ms-grid-column: 3;
+    grid-column: 3;
+    -ms-grid-row: 1;
+    grid-row: 1;
+  }
+  .gridBox.maxCol4 {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+  }
+  .gridBox.maxCol4 .monitoringContentsBox:nth-child(1) {
+    -ms-grid-column: 1;
+    grid-column: 1;
+  }
+  .gridBox.maxCol4 .monitoringContentsBox:nth-child(2) {
+    -ms-grid-column: 2;
+    grid-column: 2;
+  }
+  .gridBox.maxCol4 .monitoringContentsBox:nth-child(3) {
+    -ms-grid-column: 3;
+    grid-column: 3;
+    -ms-grid-row: 1;
+    grid-row: 1;
+  }
+  .gridBox.maxCol4 .monitoringContentsBox:nth-child(4) {
+    -ms-grid-column: 4;
+    grid-column: 4;
+    -ms-grid-row: 1;
+    grid-row: 1;
+  }
+  .percentChart {
+    width: 180px;
+    height: 180px;
+  }
+  .historyChart {
+    min-height: 240px;
+  }
+  .historyChart.xLarge {
+    height: 55vh;
+  }
+  .historyChart.large {
+    height: 40vh;
+  }
+  .historyChart.mid {
+    height: 35vh;
+  }
+  .historyChart.small {
+    height: 30vh;
+  }
+}
+/*# sourceMappingURL=salesGrid.css.map */

@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import '../color.scss';
+
+.table {
+  color: $white;
+  &>:not(caption)>*>* {
+    padding: 1rem 0.5rem;
+}
+  colgroup {
+    border-top: 0;
+  }
+  tr {
+    text-align: center;
+  }
+  th,
+  td {
+    vertical-align: middle;
+  }
+  .titleImg {
+    width: 100%;
+  }
+}

@@ -1,0 +1,48 @@
+package kr.or.ddit.admin.affiliateCard.service;
+
+import java.util.List;
+
+import kr.or.ddit.admin.affiliateCard.dao.AdminAffiliateCardDaoImpl;
+import kr.or.ddit.admin.affiliateCard.dao.IAdminAffiliateCardDao;
+import kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO;
+
+public class AdminAffiliateCardServiceImpl implements IAdminAffiliateCardService {
+	
+	private IAdminAffiliateCardDao cardCmpDao;
+	private static IAdminAffiliateCardService cardCmpService;
+	
+	private AdminAffiliateCardServiceImpl() {
+		if(cardCmpDao==null) {
+			cardCmpDao = AdminAffiliateCardDaoImpl.getInstance();
+		}
+	}
+	public static IAdminAffiliateCardService getInstance() {
+		if(cardCmpService==null) {
+			cardCmpService = new AdminAffiliateCardServiceImpl();
+		}
+		return cardCmpService;
+	}
+	@Override
+	public List<AdminAffiliateCardVO> getCardCmpAll() {
+		return cardCmpDao.getCardCmpAll();
+	}
+	@Override
+	public AdminAffiliateCardVO getCardCmp(String cardCmpnId) {
+		return cardCmpDao.getCardCmp(cardCmpnId);
+	}
+	@Override
+	public int insertCardCmp(AdminAffiliateCardVO vo) {
+		return cardCmpDao.insertCardCmp(vo);
+	}
+	@Override
+	public int updateCardCmp(AdminAffiliateCardVO vo) {
+		return cardCmpDao.updateCardCmp(vo);
+	}
+	@Override
+	public int deleteCardCmp(String cardCmpnId) {
+		return cardCmpDao.deleteCardCmp(cardCmpnId);
+	}
+	
+	
+
+}

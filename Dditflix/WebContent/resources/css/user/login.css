@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+ .modal-content {
+     background-color: #151414;
+     color: white;
+     padding: 13px
+ }
+ 
+ #img{
+ 	width: 250px;
+ 	height: 195px;
+ }
+ 
+ #frame{
+ 	margin: 16px;
+ }
+ 
+ #mkv {
+ 	margin-top : 10px;
+ }
+ 
+ .head{
+ 	display:flex;
+ 	justify-content: space-between;
+	
+ }
+ 
+ .cancel {
+     border: 1px solid #252222;
+     background: #151414;
+     color: white;
+     width: 40%
+ }
+ 
+ .btn{
+   background-color: red;
+   width: 100px;
+ }
+
+ .btn.focus,
+ .btn:focus {
+     outline: 0;
+     box-shadow: none !important
+ }
+
+ .close.focus,
+ .close:focus {
+     outline: 0;
+     box-shadow: none !important
+ }
+
+ .close {
+    color: white;
+    font-weight: 100
+ }
+
+ .modal-footer {
+     justify-content: space-between
+ }

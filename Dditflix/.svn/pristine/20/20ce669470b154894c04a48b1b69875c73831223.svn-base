@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="wishList">
+
+
+	<insert id="insertWishList" parameterClass="wishListVO">
+		MERGE INTO WISHLIST A
+		USING DUAL ON(A.CONT_TITLE = #cont_title# and A.USERS_ID = #users_id#)
+		WHEN NOT MATCHED THEN
+		INSERT (WISH_NO, USERS_ID, WISH_RGS_DT,
+		CONT_TITLE)
+		VALUES (WISH_SEQ.NEXTVAL, #users_id#, SYSDATE,
+		#cont_title#)
+	</insert>
+
+
+	<resultMap id="wishListMap" class="wishListVO">
+
+		<result property="wish_no" column="WISH_NO" />
+		<result property="users_id" column="USERS_ID" />
+		<result property="wish_rgs_dt" column="WISH_RGS_DT" />
+		<result property="wish_del_key" column="WISH_DEL_KEY" />
+		<result property="wish_del_dt" column="WISH_DEL_DT" />
+		<result property="cont_title" column="CONT_TITLE" />
+		<result property="video_serno" column="VIDEO_SERNO" />
+		<result property="ep_num" column="EP_NUM" />
+		<result property="cont_poster" column="CONT_POSTER" />
+
+	</resultMap>
+
+
+	<select id="getUserWishLsit" parameterClass="String"
+		resultClass="wishListVO">
+		select ROWNUM AS wish_no
+		,b.CONT_POSTER as cont_poster
+		,a.CONT_TITLE as cont_title
+		from WISHLIST a
+		join CONTENT b
+		on
+		a.CONT_TITLE = b.CONT_TITLE
+		where users_id=#users_id#
+	</select>
+
+
+	<delete id="deleteWishLsit" parameterClass="wishListVO">
+		DELETE
+		FROM WISHLIST
+		WHERE USERS_ID = #users_id#
+		AND CONT_TITLE = #cont_title#
+	</delete>
+
+
+</sqlMap>

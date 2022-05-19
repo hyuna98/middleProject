@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="adminMember">
+
+	<select id="getAllUserList" resultClass="usersVO">
+	SELECT USERS_ID
+			   ,a.USERS_PW as users_pw
+			   ,a.USERS_NAME as users_name
+			   ,a.USERS_HP as users_hp
+			   ,a.USERS_GENDER as users_gender
+			   ,to_char(a.USERS_BIR,'YY-MM-DD') as users_bir
+			   ,a.USERS_ZIP as users_zip
+			   ,a.USERS_ADD1 as users_add1
+			   ,a.USERS_ADD2 as users_add2
+			   ,b.MMBRS_RATING as mmbrs_rating
+			   ,a.USERS_TYPE as users_type
+		FROM USERS a
+		JOIN MEMBERSHIP b
+		ON a.MMBRS_ID = b.MMBRS_ID
+		where users_type='0'
+		and USERS_WITHDRAWAL='1'
+	</select>
+
+
+	
+	<update id="deleteUser" parameterClass="String">
+		UPDATE USERS
+		SET USERS_MOD=SYSDATE, USERS_WITHDRAWAL = '0', USERS_DEL_DT = SYSDATE
+		WHERE USERS_ID = #users_id#
+	</update>
+	
+	
+	<update id="authorization" parameterClass="String">
+		update 
+        users 
+        SET USERS_MOD=SYSDATE, USERS_TYPE='1'
+        WHERE USERS_ID =#users_id#
+	</update>
+	
+
+	
+</sqlMap>

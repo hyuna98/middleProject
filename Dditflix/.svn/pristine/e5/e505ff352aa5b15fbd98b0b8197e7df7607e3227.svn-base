@@ -1,0 +1,52 @@
+package kr.or.ddit.user.downloadPayment.controller;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/user/cart/download.do")
+public class UserDownloadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public UserDownloadServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// contitle get으로 받기
+		String fileName = request.getParameter("contitle");
+		
+		// 파일 다운로드 처리를 위한 응답헤더 정보 설정하기
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		
+		
+		BufferedInputStream bis = new BufferedInputStream(new FileInputStream("D:/D_Other/out.txt"));
+		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+		
+		int c = 0;
+		while((c = bis.read()) != -1) {
+			bos.write(c);
+		}
+		bis.close();
+		bos.close();
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

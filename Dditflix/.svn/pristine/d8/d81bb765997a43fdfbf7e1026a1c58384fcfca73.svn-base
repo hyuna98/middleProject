@@ -1,0 +1,46 @@
+package kr.or.ddit.user.myCardInfo.service;
+
+import java.util.List;
+
+import kr.or.ddit.admin.membership.vo.AdminMembershipVO;
+import kr.or.ddit.user.downloadPayment.vo.UserDownloadPaymentVO;
+import kr.or.ddit.user.myCardInfo.dao.IUserMyCardInfoDao;
+import kr.or.ddit.user.myCardInfo.dao.UserMyCardInfoDaoImpl;
+import kr.or.ddit.user.myCardInfo.vo.UserMyCardInfoVO;
+
+public class UserMyCardInfoServiceImpl implements IUserMyCardInfoService {
+	
+	private IUserMyCardInfoDao myCardInfoDao;
+	private static IUserMyCardInfoService userMyCardInfoService;
+	
+	private UserMyCardInfoServiceImpl() {
+		if(myCardInfoDao==null) {
+			myCardInfoDao = UserMyCardInfoDaoImpl.getInstance();
+		}
+	}
+	public static IUserMyCardInfoService getInstance() {
+		if(userMyCardInfoService==null) {
+			userMyCardInfoService = new UserMyCardInfoServiceImpl();
+		}
+		return userMyCardInfoService;
+	}
+	
+	@Override
+	public List<UserMyCardInfoVO> getMyCardList(String userId) {
+		return myCardInfoDao.getMyCardList(userId);
+	}
+	@Override
+	public int deleteMyCardInfo(String myCardNo) {
+		return myCardInfoDao.deleteMyCardInfo(myCardNo);
+	}
+	@Override
+	public int insertMyCardInfo(UserMyCardInfoVO vo) {
+		return myCardInfoDao.insertMyCardInfo(vo);
+	}
+	@Override
+	public int setRepreCard(UserMyCardInfoVO vo) {
+		return myCardInfoDao.setRepreCard(vo);
+	}
+
+	
+}

@@ -1,0 +1,226 @@
+<%@page import="kr.or.ddit.user.myCardInfo.vo.UserMyCardInfoVO"%>
+<%@page import="kr.or.ddit.user.downloadPayment.vo.UserDownloadPaymentVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/user/mainModal.css">
+<div class="modal fade" id="cardListModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog position-center">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title">결제하기</h2>
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+			</div>
+			<div class="modal-body">
+				<div class="mb-10 pt-4">
+					<h3 class="con-title mb-3">결제 목록</h3>
+					<table class="table">
+						<colgroup>
+								<col>
+								<col>
+								<col width="20%">
+						</colgroup>
+						<tbody class="tbody">
+						<%
+							List<UserDownloadPaymentVO> cartList = (List<UserDownloadPaymentVO>) session.getAttribute("cartList");
+										int count = 0;
+										for(int i=0; i<cartList.size(); i++){
+												count += cartList.get(i).getDwnldPymPrice();
+						%>
+								<tr>
+										<th scope="row"><%=i+1%></th>
+										<td class="text-align-left">
+												<span><%=cartList.get(i).getContTitle()%></span>
+												<%if(cartList.get(i).getVideoSerno() != 0){%>
+													<span>시즌<%=cartList.get(i).getVideoSerno()%></span>
+												<%}%>
+												<%if(cartList.get(i).getEpNum() != 0){%>
+													<span><%=cartList.get(i).getEpNum()%>화</span>
+												<%}%>
+										</td>
+										<td><%=cartList.get(i).getDwnldPymPrice()%>원</td>
+								</tr>
+						<%
+						}
+						%>
+						</tbody>
+					</table>
+				</div>
+				<div class="mb-10 pt-4">
+					<h3 class="con-title mb-3">결제 방법 선택</h3>
+					<table class="table">
+						<tr>
+							<td class="text-align-left"><span>카드 결제</span></td>
+							<td><input type="radio" name="payMethod" value="card" checked></td>
+						</tr>
+						<tr>
+							<td class="text-align-left"><span>카카오페이 결제</span></td>
+							<td><input type="radio" name="payMethod" value="kakao"></td>
+						</tr>
+					</table>
+				</div>
+				<script>
+				$("input[name=payMethod]").change(function(){
+					var pay = $(this).val();
+					if(pay=="card"){
+						$("#pay-card").slideDown();
+					} else if(pay=="kakao"){						
+						$(".payMethod").slideUp();
+					}
+				})
+				</script>
+				<div class="payBox">
+					<div id="pay-card" class="payMethod mb-10 pt-4">
+						<h3 class="con-title mb-3">내 카드 목록</h3>
+						<table id="cardList" class="table">
+							<tbody>
+							<%
+							List<UserMyCardInfoVO> cardInfoList = (List<UserMyCardInfoVO>) request.getAttribute("cardInfoList");
+							if(0<cardInfoList.size()){
+								for(UserMyCardInfoVO card : cardInfoList){
+							%>
+								<tr data-rCheck="<%=card.getRepresentativeCardWt()%>">
+									<td><%=card.getCardCmpnName()%></td>
+									<td class="fmtNum"><%=card.getCardNo()%></td>
+									<td><%=card.getCardName()==null? "":card.getCardName()%></td>
+									<td><input type="radio" name="cardSelect" value="<%=card.getCardNo() %>"></td>
+								</tr>
+							<%  }
+							} else {//등록된 카드가 없을 때
+	  						%>
+								<tr>
+									<td colspan="100%"><a class="btn btn-warning" href="../myCardInfo/insert.do">카드등록</a></td>
+								</tr>
+							<% } %>
+							</tbody>
+						</table>		
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-end border-0 mb-4">
+				<p><%=count %>원을 결제 하시겠습니까?</p>
+				<button type="button" class="btn btn-danger" id="payment">결제</button>			
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+			$.each($(".fmtNum"),function(){
+				var val = $(this).text(); 
+				$(this).text(numberFomatter(val,1));
+			});
+		});
+		
+		// 숫자 변환
+		function numberFomatter(num,type){
+		    var formatNum = '';
+		    
+		    if(num.length == 16){
+		        if(type==0){
+		            formatNum = num.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1-$2-$3-$4');
+		        }else{
+		            formatNum = num.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1-****-****-$4');
+		        }
+
+		    } else if(num.length==8){
+		        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+		    } else {
+		    	
+		        if(num.indexOf('02') == 0){
+		            if(type==0){
+		                formatNum = num.replace(/(\d{2})(\d{3})(\d{4})/, '$1-****-$3');
+		            }else{
+		                formatNum = num.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+		            }
+		        } else {
+		            if(type==0){
+		                formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-***-$3');
+		            }else{
+		                formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+		            }
+		        }
+		    }
+		    return formatNum;
+		}
+		
+		</script> 
+		<script>
+		$("#cardList").prepend($("tr[data-rCheck=Y]"));
+		$("#cardList tr[data-rCheck=Y] input[name=cardSelect]").prop("checked", true);
+		
+		$("#payment").on('click', function(){
+			let payMethod = $("input[name=payMethod]:checked").val();
+			let cardNo = $("input[name=cardSelect]:checked").val();
+			switch(payMethod){
+				case "card":
+					if(cardNo != null){				
+						$.ajax({
+							type: "post",
+							url: "userDwnldPymInsert.do",
+							data: { "selectedCardNo" : cardNo},
+							success: function(result){
+								if(result>0){
+									alert("결제성공.");
+									location.href = "list.do";
+								} else {
+									alert("결제오류.");    	
+									location.href = "list.do"
+								}
+							},
+							error : function(request, status, error) { alert("code:" + request.status + "\n" + "error:" + error); }
+						});
+					} else {
+						alert("카드를 선택해주세요.");
+					}
+					break;
+			}
+			
+		});
+	      
+		<%-- $("#check_module3").click(function(){
+		      IMP.init('imp22830422');   //아임포트 관리자계정
+		      //결제 시스템을 실행시키는 함수
+		        IMP.request_pay({
+		         pay_method: 'card',
+		         name: '프리미엄',
+		         amount: '15000',   //테스트 완료 후 가격정보 넣기
+
+		         buyer_name:"<%=usersVo.getUsers_name()%>"
+		            }, function(rsp) {
+		               if (rsp.success) {
+		                  var msg = '결제가 완료되었습니다.';
+		                  msg += rsp.buyer_name;
+		                  msg += rsp.paid_amount;
+
+		                  // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
+		                  // 결제내역을 사용자에게 보여주기 위해 필요함.
+		                  $.ajax({
+		                     url : "<%=request.getContextPath()%>/user/myPage/myMemberShip1.do",
+		                     type : "post",
+		                     data : {
+		                         "users_id" : "<%=usersVo.getUsers_id()%>",
+		                         "mmbrs_rating" : rsp.name,
+		                         "mmbrs_price" : rsp.paid_amount
+								},
+								dataType : "json",
+								success : function(result) {
+									if (result == "1") {
+										alert(msg);
+
+									} else {
+										alert("디비입력실패");
+										return false;
+									}
+								},
+								error : function(a, b, c) {
+								}
+							});
+						} else {
+							var msg = '결제에 실패하였습니다.';
+							msg += '에러내용 : ' + rsp.error_msg;
+						}
+						alert(msg);
+					});
+				}); --%>
+		</script>

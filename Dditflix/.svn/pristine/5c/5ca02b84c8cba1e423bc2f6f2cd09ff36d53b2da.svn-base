@@ -1,0 +1,25 @@
+.table {
+  color: #fff;
+}
+
+.table > :not(caption) > * > * {
+  padding: 1rem 0.5rem;
+}
+
+.table colgroup {
+  border-top: 0;
+}
+
+.table tr {
+  text-align: center;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table .titleImg {
+  width: 100%;
+}
+/*# sourceMappingURL=cart.css.map */

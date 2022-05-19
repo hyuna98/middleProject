@@ -1,0 +1,116 @@
+<%@page import="kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../../common/header.jsp" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/comm_sub.css"> 
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/user/myPage.css"> 
+    <div class="bgBox">
+        <div class="concord-img-gradient">
+			<nav id="nav">
+				<dl>
+					<dt>마이페이지</dt>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/main.do">개인정보조회 및 수정</a>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/myMemberShip.do">My 멤버십</a>
+					</dd>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myCardInfo/list.do">내 카드 정보</a>
+					</dd>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/withdrawal.do">회원 탈퇴</a>
+					</dd>
+				</dl>
+
+			</nav>
+		</div>
+        <div class="main">
+            <div class="titleWrap mb-5">
+                <h2 class="pageTitle pb-3">나의 카드 등록</h2>
+            </div>
+            <form action="insert.do" method="post" id="form">
+            	<div class="form-group row">
+            		<label class="label col-sm-2">카드사 선택</label>
+            		<div class="col-sm-2">
+	            		<select class="form-select" name="cardCmpnId">
+	            		<%
+							List<AdminAffiliateCardVO> cardCmpList = (List<AdminAffiliateCardVO>) request.getAttribute("cardCmpList");
+							if (cardCmpList.size() > 0) {
+								for (int i=0; i<cardCmpList.size(); i++) {
+						%>
+	            			<option value="<%=cardCmpList.get(i).getCardCmpnId() %>"><%=cardCmpList.get(i).getCardCmpnName() %></option>
+						<%
+								}
+							}						
+						%>
+	            		</select>
+	            	</div>
+            	</div>
+            	<div class="form-group row">
+            		<label class="label col-sm-2">이름</label>
+            		<div class="col-sm-2">
+            			<input class="input-text" type="text" name="name">
+            		</div>
+            	</div>
+            	<div class="form-group row">
+            		<label class="label col-sm-2">카드번호 입력</label>
+            		<div class="col-sm-1">
+            			<input class="input-text cardNo" type="text" name="cardNo1">
+            		</div>
+            		<div class="col-sm-1">
+            			<input class="input-text cardNo" type="text" name="cardNo2">
+            		</div>
+            		<div class="col-sm-1">
+            			<input class="input-text cardNo" type="text" name="cardNo3">
+            		</div>
+            		<div class="col-sm-1">
+            			<input class="input-text cardNo" type="text" name="cardNo4">
+            		</div>
+            	</div>
+            	<div class="form-group row">
+            		<label class="label col-sm-2">CVC</label>
+            		<div class="col-sm-2">
+            			<input class="input-text" type="text" name="cardCvc">
+            		</div>
+            	</div>
+            	<div class="form-group row">
+            		<label class="label col-sm-2">유효기간</label>
+            		<div class="col-sm-1">
+	            		<input class="input-text" type="text" name="cardMM">
+	            	</div>
+               		<div class="col-sm-1">
+	 					<input class="input-text" type="text" name="cardYYYY">
+	 				</div>
+            	</div>
+            	<div class="form-group row">
+            		<label class="label col-sm-2">카드 별칭 입력</label>
+            		<div class="col-sm-2">
+            			<input class="input-text" type="text" name="cardName">
+            		</div>
+            	</div>
+            	<div class="text-align-center">
+            		<input id="submitBtn" class="btn btn-danger" type="button" value="등록">
+            	</div>
+            </form>
+            <script>
+            	$("#submitBtn").click(function(){
+            		$.ajax({
+            			type: "post",
+            			url: "insert.do",
+            			data: $("#form").serialize(),
+            			success: function(result){
+            				if(result=="성공"){
+    							alert("입력되었습니다.");
+    							location.href="list.do"
+    						} else {
+    							alert("입력 실패.");
+    							location.href="list.do"
+    						}
+            			}
+            			
+            		})
+            	});
+            </script>
+        </div>
+    </div>
+<jsp:include page="../../common/footer.jsp" />

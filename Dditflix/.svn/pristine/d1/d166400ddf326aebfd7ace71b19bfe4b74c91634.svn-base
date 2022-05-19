@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="userDwnldPym">
+
+<select id="getDwnPym" parameterClass="String" resultClass="userDwnldPymVO">
+SELECT DWNLD_PYM_CART_NO as dwnldPymCartNo
+	   ,a.CONT_TITLE as contTitle
+	   ,b.CONT_POSTER as poster
+  FROM DOWNLOAD_PAYMENT a
+  JOIN CONTENT b
+		on a.CONT_TITLE = b.CONT_TITLE
+		where DWNLD_PYM_DEL_KEY = 'N'
+		and	users_id=#usersId#
+</select>
+
+	<update id="deleteDwnPym" parameterClass="userDwnldPymVO">
+		UPDATE
+		DOWNLOAD_PAYMENT
+		SET DWNLD_PYM_DEL_DT=SYSDATE, DWNLD_PYM_DEL_KEY = 'Y'
+		WHERE USERS_ID = #usersId#
+		and CONT_TITLE=#contTitle#
+	</update>
+
+
+<resultMap id="downloadPaymentMap" class="userDwnldPymVO">
+	<result property="contTitle" column="CONT_TITLE"/>
+	<result property="videoSerno" column="VIDEO_SERNO"/>
+	<result property="epNum" column="EP_NUM"/>
+	<result property="usersId" column="USERS_ID"/>
+	<result property="dwnldPymCartNo" column="DWNLD_PYM_CART_NO"/>
+	<result property="dwnldPymDelKey" column="DWNLD_PYM_DEL_KEY"/>
+	<result property="dwnldPymPayDt" column="DWNLD_PYM_PAY_DT"/>
+	<result property="dwnldPymDelDt" column="DWNLD_PYM_DEL_DT"/>
+	<result property="dwnldPymDelDt" column="DWNLD_PYM_DEL_DT"/>
+	<result property="poster" column="CONT_POSTER"/>
+</resultMap>
+
+
+
+
+<select id="checkPaid" parameterClass="userDwnldPymVO" resultMap="downloadPaymentMap" >
+	select * from DOWNLOAD_PAYMENT where USERS_ID=#usersId# and CONT_TITLE=#contTitle# and VIDEO_SERNO=#videoSerno# and EP_NUM=#epNum#
+</select>
+
+<select id="getNewCartNo" resultClass="String" >
+	select F_SEQ_DWNLD_PYM_CART_NO('NOW') from dual
+</select>
+
+<insert id="insertDwldPym" parameterClass="userDwnldPymVO">
+	INSERT INTO DOWNLOAD_PAYMENT ( 
+		CONT_TITLE 
+		, VIDEO_SERNO 
+		, EP_NUM
+		, USERS_ID
+		, DWNLD_PYM_CART_NO
+		, DWNLD_PYM_DEL_KEY
+		, DWNLD_PYM_PAY_DT
+		, DWNLD_PYM_DEL_DT
+		, DWNLD_PYM_PRICE
+		
+	) VALUES  
+	( 
+		#contTitle# 
+		, #videoSerno# 
+		, #epNum#
+		, #usersId#
+		, #dwnldPymCartNo#
+		, 'N'
+		, sysdate
+		, null
+		, #dwnldPymPrice#
+	) 
+
+</insert>
+
+</sqlMap>

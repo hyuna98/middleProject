@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../../common/header.jsp" />
+    <link rel="stylesheet" href="../../resources/css/user/main.css">
+    <div id="visualFrame">
+        <div class="contents">
+            <img class="image-layer" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABYu8kD-SAlvyJcNweLIhizHSxnmYJJBcpXtStuql7zvuseqImaDvXS5IQzdNhMYxJrfBgUSKtjkfSNrmOHp6lSpo16PT.webp?r=a90" alt="">
+            <div class="vignette-layer"></div>
+            <div class="info">
+                <div class="logo-and-text">
+                    <div class="title-wrapper mb-sm-4">
+                        <img alt="Men On A Mission" class="title-logo" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABV0V5eRIbATrseOGcJY7sH7lQzPmD8s-bZeflcTYbRwwsbkCLbP_RFGm1klhFVJcHZp9R_Z9P9IJZHqzY5xQf_D5O6iXTn7w13ik.webp?r=760" title="Men On A Mission">
+                    </div>
+                    <div class="info-wrapper pb-sm-4">
+                        <div class="synopsis"> Male celebs play make-believe as high schoolers, welcoming star transfer students every week and engaging in battles of witty humor and slapstick. </div>
+                    </div>
+                    <div class="button-layer">
+                        <a data-uia="play-button" role="link" aria-label="Play" class="playLink" href="/watch/81414458?trackId=254015180&amp;tctx=0%2C0%2C84f33d78-3678-4daf-a667-8b661b78830d-726360064%2Ce94e816b-bba8-4a68-87b2-dbd9fd97ae33_524920419X20XX1641301743595%2Ce94e816b-bba8-4a68-87b2-dbd9fd97ae33_ROOT%2C%2C%2C">
+                            <button class="btn btn-light btn-xlg d-flex align-items-center hasLabel hasIcon" type="button">
+                                <img src="../../resources/images/play.svg" alt="play">
+                                <span>Play</span>
+                            </button>
+                        </a>
+                        <!-- <button class="color-secondary hasLabel hasIcon" data-uia="billboard-more-info" type="button">
+                            <img src="../../resources/images/info.svg" alt="info">
+                            <span>More Info</span>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+    <section class="section">
+        <h2 class="rowTitle pb-sm-3 pb-lg-4">Only on Netflix</h2>
+        <div class="rowContainer">
+            <div class="sliderFr">
+                <span class="arrowBtn rightBtn"></span>
+                <span class="arrowBtn leftBtn active"></span>
+                <ul class="slider">
+                    <li class="slide-item active">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="section pt-sm-4 pt-lg-5">
+        <h2 class="rowTitle pb-sm-3 pb-lg-4">Only on Netflix</h2>
+        <div class="rowContainer">
+            <div class="sliderFr">
+                <span class="arrowBtn rightBtn"></span>
+                <span class="arrowBtn leftBtn"></span>
+                <ul class="slider">
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                    <li class="slide-item">
+                        <a href=""><img class="boxart-image boxart-image-in-padded-container" src="https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQQym9ysawvN1xtqNqdr3dXRFYwOr408T_h0QDkhdBUG93eK5vrZZ5_fiZNDllcoojUkLNVhQGUepHKSmICpYTjuh0bcyLTDv3oW42fNqcMh9iAqM7op3NOBSYzviMoh2q11QUh_z5EfemeQt49McPIJR69UmKrgsQRdC33knkr9Q-tAAkPTjXvfp8U3.webp?r=a9f" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <jsp:include page="../../common/footer.jsp" />

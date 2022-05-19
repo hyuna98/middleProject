@@ -1,0 +1,19 @@
+package kr.or.ddit.admin.content.dao;
+
+import kr.or.ddit.admin.content.vo.AdminContentVO;
+
+public interface IAdminContentDao {
+
+	// 컨텐츠 등록
+	public int insertContent(AdminContentVO vo) throws Exception;
+	
+	//컨텐츠 삭제
+	public int deleteContent(String title) throws Exception;
+	
+	//비디오 삭제
+	public int deleteVideo(String title) throws Exception;
+	
+	//에피소드 삭제
+	public int deleteEpisode(String title) throws Exception;
+	
+}

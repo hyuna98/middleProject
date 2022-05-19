@@ -1,0 +1,31 @@
+package kr.or.ddit.admin.content.dao;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.admin.content.vo.AdminContentVO;
+import kr.or.ddit.util.SqlMapClientFactory;
+
+public class AdminContentDaoImpl implements IAdminContentDao{
+	
+	private SqlMapClient smc;
+	private static IAdminContentDao dao;
+	
+	private AdminContentDaoImpl() {
+		smc = SqlMapClientFactory.getInstance();
+	}
+	
+	public static IAdminContentDao getInstance() {
+		if(dao == null) {
+			dao = new AdminContentDaoImpl();
+		}
+		return dao;
+	}
+
+	@Override
+	public int insertContent(AdminContentVO vo) throws Exception {
+		
+		return smc.update("adminContent.insertContent", vo);
+	}
+	
+
+}

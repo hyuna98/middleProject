@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="userMyCardInfo">
+
+<resultMap id="userMyCardInfoMap" class="userMyCardInfoVO">
+	<result property="cardNo" column="CARD_NO"/>
+	<result property="usersId" column="USERS_ID"/>
+	<result property="membershipId" column="CARD_CMPN_ID"/>
+	<result property="representativeCardWt" column="REPRESENTATIVE_CARD_WT"/>
+	<result property="cardRgsDt" column="CARD_RGS_DT"/>
+	<result property="cardDelDt" column="CARD_DEL_DT"/>
+	<result property="cardDelKey" column="CARD_DEL_KEY"/>
+	<result property="cardName" column="CARD_NAME"/>
+
+	<result property="membershipName" column="CARD_CMPN_NAME"/>
+</resultMap>
+
+
+<select id="getMyCardList" parameterClass="String" resultMap="userMyCardInfoMap">
+	SELECT C.*, A.CARD_CMPN_NAME 
+	  FROM MYCARDINFO C 
+	  LEFT OUTER JOIN AFFILIATE_CARD_COMPANY A
+	    ON C.CARD_CMPN_ID = A.CARD_CMPN_ID
+	 WHERE C.USERS_ID = #userId#
+</select>
+
+<select id="getMyCardInfo" parameterClass="String" resultMap="userMyCardInfoMap">
+	select * from MYCARDINFO where CARD_NO=#cardNo# 
+</select>
+
+<update id="insertMyCardInfo" parameterClass="userMyCardInfoVO">
+	insert into MYCARDINFO
+	values
+	(
+		#cardNo#
+		, #usersId#
+		, #membershipId#
+		, 'N'
+		, sysdate
+		, null
+		, #cardName#
+		, 'N'
+	)
+
+</update>
+
+<update id="initRepre" parameterClass="String">
+	update MYCARDINFO
+	set
+		REPRESENTATIVE_CARD_WT = 'N'
+	where USERS_ID=#usersId# 
+</update>
+
+<update id="setRepreCard" parameterClass="userMyCardInfoVO">
+	update MYCARDINFO
+	set
+		REPRESENTATIVE_CARD_WT = 'Y'
+	where USERS_ID=#usersId# 
+	and CARD_NO=#cardNo#
+</update>
+
+
+<update id="deleteMyCardInfo" parameterClass="String">
+	delete from MYCARDINFO
+	where CARD_NO=#cardNo# 
+</update>
+
+</sqlMap>

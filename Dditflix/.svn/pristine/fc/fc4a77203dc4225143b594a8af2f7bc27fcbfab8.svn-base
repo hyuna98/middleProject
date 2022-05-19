@@ -1,0 +1,76 @@
+package kr.or.ddit.user.myCardInfo.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import kr.or.ddit.admin.membership.service.AdminMembershipServiceImpl;
+import kr.or.ddit.admin.membership.service.IAdminMembershipService;
+import kr.or.ddit.admin.membership.vo.AdminMembershipVO;
+import kr.or.ddit.user.login.vo.LoginVO;
+import kr.or.ddit.user.myCardInfo.service.IUserMyCardInfoService;
+import kr.or.ddit.user.myCardInfo.service.UserMyCardInfoServiceImpl;
+import kr.or.ddit.user.myCardInfo.vo.UserMyCardInfoVO;
+
+@WebServlet("/user/myCardInfo/insert.do")
+public class UserMyCardInfoInsertServlet extends HttpServlet {
+	
+	private IAdminMembershipService membershipService;
+	private IUserMyCardInfoService userMyCardInfoService;
+	
+	
+	public UserMyCardInfoInsertServlet() {
+		if(userMyCardInfoService==null) {
+			userMyCardInfoService = UserMyCardInfoServiceImpl.getInstance();
+		}
+		if(membershipService==null) {
+			membershipService = AdminMembershipServiceImpl.getInstance();
+		}
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<AdminMembershipVO> list = membershipService.getMembershipAll();
+		
+		request.setAttribute("membershipList", list);
+		request.getRequestDispatcher("/WEB-INF/views/user/myCardInfo/insert.jsp").forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	      
+	      HttpSession session = request.getSession();
+	      LoginVO user = (LoginVO) session.getAttribute("loginChk");
+	   
+	      String usersId = user.getUsers_id();
+	      String cardCmpnId = request.getParameter("cardCmpnId")==null? "" : request.getParameter("cardCmpnId");
+	      String cardNo1 = request.getParameter("cardNo1")==null? "" : request.getParameter("cardNo1");
+	      String cardNo2 = request.getParameter("cardNo2")==null? "" : request.getParameter("cardNo2");
+	      String cardNo3 = request.getParameter("cardNo3")==null? "" : request.getParameter("cardNo3");
+	      String cardNo4 = request.getParameter("cardNo4")==null? "" : request.getParameter("cardNo4");
+	      String cardNo = cardNo1 + cardNo2 + cardNo3 + cardNo4;
+	      String cardName = request.getParameter("cardName")==null? "" : request.getParameter("cardName");
+	      
+	      UserMyCardInfoVO vo = new UserMyCardInfoVO();
+	      vo.setCardCmpnId(cardCmpnId);
+	      vo.setCardNo(cardNo);
+	      vo.setUsersId(usersId);
+	      vo.setCardName(cardName);
+	      
+	      int cnt = userMyCardInfoService.insertMyCardInfo(vo);
+	      
+	      if(cnt > 0) {
+	         response.getWriter().print("성공");
+	      } else {
+	         response.getWriter().print("실패");
+	      }
+	      
+	   }
+
+}

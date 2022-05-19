@@ -1,0 +1,63 @@
+package kr.or.ddit.admin.content.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.admin.content.service.AdminContentServiceImpl;
+import kr.or.ddit.admin.content.service.IAdminContentService;
+import kr.or.ddit.admin.content.vo.AdminContentVO;
+
+
+@WebServlet("/admin/content/updateContent.do")
+public class AdminContentUpdateServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    private IAdminContentService service;
+    
+    public AdminContentUpdateServlet() {
+        service = AdminContentServiceImpl.getInstance();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	String conTitle = request.getParameter("contitle");
+    	AdminContentVO vo = service.getContent(conTitle);
+    	
+    	request.setAttribute("updateContent", vo);
+    	
+    	request.getRequestDispatcher("/WEB-INF/views/admin/content/ContentUpdate.jsp").forward(request, response);
+    }
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String conTitle = request.getParameter("contitle");
+//		String poster = request.getParameter("poster");
+		String cast = request.getParameter("cast");
+		String director = request.getParameter("director");
+		String rating = request.getParameter("rating");
+		String plot = request.getParameter("plot");
+		AdminContentVO vo = new AdminContentVO();
+		vo.setCont_title(conTitle);
+		vo.setCont_cast(cast);
+		vo.setCont_director(director);
+		vo.setPrice_rating_id(rating);
+		vo.setEp_plot(plot);
+		
+		int contentResult = service.updateContent(vo);
+		int plotResult = service.updatePlot(vo);
+		
+		if(contentResult > 0 && plotResult > 0) {
+			response.getWriter().print("성공");
+		}else {
+			response.getWriter().print("실패");
+		}
+		
+		
+	}
+
+}

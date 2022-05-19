@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="join">
+  
+  <insert id="insertUser" parameterClass="joinVO">
+  	insert into users
+  	(users_id,
+  	 users_pw,
+  	 users_name,
+  	 users_gender,
+  	 users_bir,
+  	 users_zip,
+  	 users_add1,
+  	 users_add2,
+  	 users_hp,
+  	 users_email
+  	)
+  	values(
+  	 #users_id#,
+  	 #users_pw#,
+  	 #users_name#,
+  	 #users_gender#,
+  	 #users_bir#,
+  	 #users_zip#,
+  	 #users_add1#,
+  	 #users_add2#,
+  	 #users_hp#,
+  	 #users_mail#
+  	)
+  
+  </insert>
+  
+  <select id="checkId" resultClass="String" parameterClass="String">
+  	SELECT USERS_ID 
+  	  FROM USERS
+  	 WHERE USERS_ID = #users_id#
+  </select>
+
+
+</sqlMap>    

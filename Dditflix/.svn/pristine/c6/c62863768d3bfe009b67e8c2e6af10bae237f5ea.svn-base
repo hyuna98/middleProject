@@ -1,0 +1,16 @@
+package kr.or.ddit.user.myCardInfo.service;
+
+import java.util.List;
+
+import kr.or.ddit.user.myCardInfo.vo.UserMyCardInfoVO;
+
+public interface IUserMyCardInfoService {
+
+	public List<UserMyCardInfoVO> getMyCardList(String userId);
+
+	public int deleteMyCardInfo(String myCardNo);
+
+	public int insertMyCardInfo(UserMyCardInfoVO vo);
+
+	public int setRepreCard(UserMyCardInfoVO vo);
+}

@@ -1,0 +1,56 @@
+package kr.or.ddit.admin.membership.controller;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.admin.membership.service.AdminMembershipServiceImpl;
+import kr.or.ddit.admin.membership.service.IAdminMembershipService;
+import kr.or.ddit.admin.membership.vo.AdminMembershipVO;
+import kr.or.ddit.user.board.service.BoardServiceImpl;
+import kr.or.ddit.user.board.service.IBoardService;
+import kr.or.ddit.user.board.vo.BoardVO;
+
+@WebServlet("/admin/membership/insert.do")
+public class AdminMembershipInsertServlet extends HttpServlet {
+	private IAdminMembershipService membershipService;
+	
+	
+	
+	public AdminMembershipInsertServlet() {
+		if(membershipService==null) {
+			membershipService = AdminMembershipServiceImpl.getInstance();
+		}
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("/WEB-INF/views/admin/membership/insert.jsp").forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String cardCmpnId = request.getParameter("cardCmpnId")==null? "" : request.getParameter("cardCmpnId");
+		String cardCmpnName = request.getParameter("cardCmpnName")==null? "" : request.getParameter("cardCmpnName");
+		
+		AdminMembershipVO vo = new AdminMembershipVO();
+		vo.setCardCmpnId(cardCmpnId);
+		vo.setCardCmpnName(cardCmpnName);
+		int cnt = membershipService.insertCardCmp(vo);
+		
+		if(cnt > 0) {
+			response.getWriter().print("성공");
+		} else {
+			response.getWriter().print("실패");
+		}
+		
+	}
+
+}

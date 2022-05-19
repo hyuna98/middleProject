@@ -1,0 +1,56 @@
+package kr.or.ddit.admin.affiliateCard.controller;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.admin.affiliateCard.service.AdminAffiliateCardServiceImpl;
+import kr.or.ddit.admin.affiliateCard.service.IAdminAffiliateCardService;
+import kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO;
+import kr.or.ddit.user.board.service.BoardServiceImpl;
+import kr.or.ddit.user.board.service.IBoardService;
+import kr.or.ddit.user.board.vo.BoardVO;
+
+@WebServlet("/admin/affiliateCard/insert.do")
+public class AdminAffiliateCardInsertServlet extends HttpServlet {
+	private IAdminAffiliateCardService cardCmpService;
+	
+	
+	
+	public AdminAffiliateCardInsertServlet() {
+		if(cardCmpService==null) {
+			cardCmpService = AdminAffiliateCardServiceImpl.getInstance();
+		}
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("/WEB-INF/views/admin/affiliateCard/insert.jsp").forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String cardCmpnId = request.getParameter("cardCmpnId")==null? "" : request.getParameter("cardCmpnId");
+		String cardCmpnName = request.getParameter("cardCmpnName")==null? "" : request.getParameter("cardCmpnName");
+		
+		AdminAffiliateCardVO vo = new AdminAffiliateCardVO();
+		vo.setCardCmpnId(cardCmpnId);
+		vo.setCardCmpnName(cardCmpnName);
+		int cnt = cardCmpService.insertCardCmp(vo);
+		
+		if(cnt > 0) {
+			response.getWriter().print("성공");
+		} else {
+			response.getWriter().print("실패");
+		}
+		
+	}
+
+}

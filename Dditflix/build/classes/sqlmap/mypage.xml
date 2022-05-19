@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="mypage">
+	<select id="getUser"  parameterClass="String" resultClass="LoginVO">
+		SELECT USERS_ID
+			   ,a.USERS_PW as users_pw
+			   ,a.USERS_NAME as users_name
+			   ,a.USERS_HP as users_hp
+			   ,a.USERS_GENDER as users_gender
+			   ,to_char(a.USERS_BIR,'YYYY-MM-DD') as users_bir
+			   ,a.USERS_ZIP as users_zip
+			   ,a.USERS_ADD1 as users_add1
+			   ,a.USERS_ADD2 as users_add2
+			   ,b.MMBRS_RATING as mmbrs_id
+		FROM USERS a
+		JOIN MEMBERSHIP b
+		ON a.MMBRS_ID = b.MMBRS_ID
+		WHERE USERS_ID=#users_id#
+	</select>
+	
+	<update id="updateUser" parameterClass="myPageVO">
+		UPDATE USERS
+		SET USERS_PW = #users_pw#, USERS_HP = #users_hp#, USERS_ADD1 = #users_add1#, USERS_ADD2 = #users_add2#, USERS_MOD = SYSDATE
+		WHERE USERS_ID = #users_id#
+	</update>
+	
+	<update id="deleteUser" parameterClass="myPageVO">
+		UPDATE USERS
+		SET USERS_MOD=SYSDATE, USERS_WITHDRAWAL = '0', USERS_DEL_DT = SYSDATE
+		WHERE USERS_ID = #users_id#
+		and USERS_PW=#users_pw#
+	</update>
+	
+	
+	
+	<resultMap id="userMap" class="myPageVO">
+	
+	<result property="users_id" column="USERS_ID"/>
+	<result property="users_pw" column="USERS_PW"/>
+	<result property="users_name" column="USERS_NAME"/>
+	<result property="users_bir" column="USERS_BIR"/>
+	<result property="users_hp" column="USERS_HP"/>
+	<result property="users_add1" column="USERS_ADD1"/>
+	<result property="users_add2" column="USERS_ADD2"/>
+	<result property="mmbrs_id" column="MMBRS_RATING"/>
+	<result property="users_type" column="USERS_TYPE"/>
+	
+	</resultMap>
+	
+	
+	<select id="getUserAll" resultMap="userMap">
+	SELECT
+    a.users_id as users_id,
+    a.users_pw as users_pw,
+    a.users_name as users_name,
+    a.users_bir as users_bir,
+    a.users_hp as users_hp,
+    a.users_add1 as users_add1,
+    a.users_add2 as users_add2,
+    b.mmbrs_rating as mmbrs_id,
+    a.users_type as users_type
+FROM
+    users a
+join  membership b
+ON a.MMBRS_ID = b.MMBRS_ID;
+ 
+	</select>
+	
+</sqlMap>

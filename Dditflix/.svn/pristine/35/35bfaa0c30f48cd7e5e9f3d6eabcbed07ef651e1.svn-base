@@ -1,0 +1,528 @@
+$base-bg-blue: #f4f7fc;
+$base-bg-grayBlue: #c4cedd;
+$base-bg-plum: #d6dbf1;
+$bg: #00236a;
+$point-color-blue: #3b7ddd;
+$point-color-red: rgb(231, 35, 74);
+$font-color: #6c757d;
+$font-color-dark: #212529;
+$border-color: #e3e3e3;
+$border-color-plum: #9986fa25;
+$border-color-purple: #cad3f7;
+$white: #fff;
+$gray: #ddd;
+$black: #020202;
+$point-color: #4a3ef8;
+$radius: 1rem;
+
+.contentsBox {
+  padding: 1em;
+  &.addPadding {
+    padding: 2.2em 1em;
+  }
+}
+.table {
+  thead {
+    th {
+      padding: 0.6em;
+    }
+  }
+  tbody {
+    td {
+      padding: 0.6em;
+    }
+  }
+}
+
+.gridBox {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(1, minmax(250px, auto));
+  grid-auto-rows: 1fr;
+  &.maxCol3-colRatio-21 {
+    width: 100%;
+    max-width: 580px;
+  }
+}
+.monitoringContentsBox {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  padding: 10px;
+  border-radius: $radius;
+  box-sizing: border-box;
+  background-color: $font-color;
+  color: $white;  
+  .monitoringTitle {
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  &.off {
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -35%, 0);
+      width: 100%;
+      height: 70px;
+      background: url(../images/off.svg) center/contain no-repeat;
+      font-size: 3em;
+      opacity: 0.3;
+    }
+    .monitoringContent {
+      background-color: transparent;
+      color: $font-color;
+      visibility: hidden;
+    }
+  }
+  &.placeHolder::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    background: url(../images/lock.svg) center/76px no-repeat;
+    opacity: .5;
+  }
+}
+.datetime {
+  text-align: right;
+  font-size: 14px;
+  padding-top: 3px;
+}
+.currentChart {
+  display: block;
+  &.speedometer {
+    width: 100%;
+    height: 140px;
+    margin-bottom: 0.5em;
+  }
+}
+#pin {
+  transition: 0.3s;
+  transform-origin: 256px 292px;
+}
+
+.monitoringContent {
+  // overflow: auto;
+  margin-bottom: 10px;
+  padding: 1em;
+  border-radius: $radius;
+  background-color: $white;
+  color: $font-color;
+  align-self: stretch;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &.addLine{
+    padding: 1.7em 1em;
+    .valueBox {
+      &::before {
+        content: '';
+        display: block;
+        margin: 15px auto 20px;
+        width: 80%;
+        height: 2px;
+        background-color: $base-bg-plum;
+      }
+      &:first-of-type::before {
+        content: none;
+      }
+    }
+  }
+  &.addPadding {
+    padding: 42px 0;
+  } 
+  &.hasChart {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+    .valueBox {
+      padding: 1.8rem;
+      z-index: 1;
+      .valueTitle::after {
+        content: '';
+        display: block;
+        margin: 16px auto 11px;
+        width: 100%;
+        height: 2px;
+        background-color: $base-bg-plum;
+      }
+    }
+    .historyChart {
+      width: 300px;
+    }
+  }
+}
+.valueBox {
+  line-height: 1;
+  text-align: center;
+  font-weight: bolder;
+  .valueTitle {
+    margin-bottom: 10px;
+  }
+  .number {
+    font-size: 3.5rem;
+    margin: -2px;
+  }
+  .number:nth-of-type(2) {
+    font-size: 2.5rem;
+    &::before {
+      content: ".";
+    }
+  }
+  .currentValue {
+    flex-grow: 1;
+    margin-right: 1rem;
+    width: 20%;
+    h4 {
+      margin-bottom: 0.5em;
+      font-size: 14px;
+    }
+    span {
+      display: block;
+      padding: 0.5em;
+      border-radius: 3em;
+      background-color: $point-color-blue;
+      font-size: 20px;
+      color: $white;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.label {
+  &:after {
+    font-size: 0.9rem;
+    padding-left: 2px;
+    vertical-align: center;
+  }
+  &.value-time::after {
+    content: "(H)";
+  }
+  &.value-watt::after {
+    content: "(W)";
+  }
+  &.value-tem::after {
+    content: "(℃)";
+  }
+  &.value-weight::after {
+    content: "(Kg)";
+  }
+  &.value-kg::after {
+    content: "Kg";
+    font-size: 0.6em;
+  }
+  &.value-per::after {
+    content: "%";
+  }
+  &.value-percent::after {
+    content: "%";
+    font-size: 0.6em;
+  }
+  &.value-amount::after {
+    display: inline-block;
+    content: "건";
+    padding-top: 0.3em;
+    padding-left: 0.3em;
+    font-size: 0.4em;
+    vertical-align: middle;
+  }
+  &.value-cnt::after {
+    display: inline-block;
+    content: "개";
+    padding-top: 0.3em;
+    padding-left: 0.3em;
+    font-size: 0.4em;
+    vertical-align: middle;
+  }
+  &.value-won::after {
+    display: inline-block;
+    content: "만원";
+    padding-top: 0.3em;
+    padding-left: 0.3em;
+    font-size: 0.4em;
+    vertical-align: middle;
+  }
+  &.value-won2::after {
+    display: inline-block;
+    content: "(만원)";
+    padding-top: 0.3em;
+    padding-left: 0.3em;
+    font-size: 0.5em;
+    vertical-align: middle;
+  }
+}
+.percentBox {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  .percentChart {
+    margin: .5em;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    svg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    text {
+      font-family: "RamaGothicM-Heavy", Impact, Haettenschweiler,
+        "Franklin Gothic Bold", Charcoal, "Helvetica Inserat",
+        "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+      font-size: 3rem;
+      font-weight: 400;
+      fill: #1072b8;
+    }
+    path.color0 {
+      fill: #1072b8;
+    }
+    path.color1 {
+      fill: #35526b;
+    }
+  }
+  .percentValueBox {
+    padding: 1em;
+    flex-shrink: 0;
+    flex-grow: 1;
+    width: 60%;
+    max-width: 420px;
+    .currentInfoBox {
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+      margin-top: 15px;
+      .currentInfo {
+        text-align: left;
+        &.right {
+          align-self: flex-end;
+        }
+        .title {
+          display: inline-block;
+          margin-bottom: 10px;
+        }
+        .date {
+          display: block;
+          padding-bottom: 4px;
+          text-indent: 10px;
+          &::before {
+            content: '- ';
+          }
+        }
+      }
+    }
+  }
+}
+.totalProductChart {
+  overflow: hidden;
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  height: 420px;
+  border-radius: $radius;
+  background: lighten(#f0f4c3, 10%);
+  .totalValue {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    z-index: 11;
+    text-align: center;
+    transform: translate3d(0, -50%, 0);
+    color: white;
+    font-size: 6em;
+    text-shadow: 0 0 10px rgba(black, 0.2);
+    text-indent: 0.1em;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to top,
+      rgba(#e8a, 0.7),
+      rgba(#def, 0) 80%,
+      rgba(white, 0.5)
+    );
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.historyChart {
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: $radius;
+  width: 100%;
+  height: 320px;
+  background-color: $white;
+  .axis--x path {
+    display: none;
+  }
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+}
+
+.waveBox {
+  top: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: .3s;
+}
+
+.wave {
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  background: #0af;
+  width: 1200px;
+  padding-top: 1200px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 7s infinite linear;
+}
+
+.wave.-three {
+  left: 55%;
+  animation: drift 9s infinite linear;
+}
+
+.wave.-two {
+  left: 45%;
+  animation: drift 11s infinite linear;
+  opacity: 0.4;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contentsBox {
+    &.half { 
+      > * {
+        width: calc(50% + 0.5em);
+        margin-bottom: -.5em;
+      }
+    }
+  }
+  .gridBox {
+    &.maxCol2 {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+    &.maxCol3-rowRatio-21 {
+      grid-template-columns: 50% 50%;
+    }
+    &.maxCol3-colRatio-21 {
+      grid-template-columns: 50% 50%;
+      .monitoringContentsBox:nth-child(1) {
+        grid-column: 1 / span 2;
+      }
+    }
+    &.maxCol4 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .percentValueBox {
+    .currentValue {
+      span {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .gridBox {
+    width: 100%;
+    &.maxCol2 {
+      grid-template-columns: repeat(2, minmax(40%, 100%));
+    }
+    &.maxCol3 {
+      grid-template-columns: repeat(3, minmax(30%, 100%));
+    }
+    &.maxCol3-rowRatio-21 {
+      grid-template-columns: repeat(3, minmax(30%, 100%));
+      .monitoringContentsBox:first-of-type {
+        grid-column: span 2;
+      }
+    }
+    &.maxCol3-colRatio-21 {
+      max-width: unset;
+      grid-template-columns: repeat(3, minmax(30%, 100%));
+      .monitoringContentsBox:nth-child(1) {
+        grid-column: 1;
+      }
+      .monitoringContentsBox:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .monitoringContentsBox:nth-child(3) {
+        grid-column: 3;
+        grid-row: 1;
+      }
+    }
+    &.maxCol4 {
+      grid-template-columns: repeat(4, 1fr);
+      .monitoringContentsBox:nth-child(1) {
+        grid-column: 1;
+      }
+      .monitoringContentsBox:nth-child(2) {
+        grid-column: 2;
+      }
+      .monitoringContentsBox:nth-child(3) {
+        grid-column: 3;
+        grid-row: 1;
+      }
+      .monitoringContentsBox:nth-child(4) {
+        grid-column: 4;
+        grid-row: 1;
+      }
+    }
+  }
+  .percentChart {
+    width: 180px;
+    height: 180px;
+  }
+  .historyChart {
+    min-height: 240px;
+    &.xLarge {
+      height: 55vh;
+    }
+    &.large {
+      height: 40vh;
+    }
+    &.mid {
+      height: 35vh;
+    }
+    &.small {
+      height: 30vh;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마이페이지</title>
+<jsp:include page="../../common/header.jsp" />
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.svg">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/comm_sub.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/user/myPage.css">
+<script	src="${pageContext.request.contextPath}/resources/js/jquery/jquery-3.6.0.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/js/bootstrap/bootstrap.min.js"></script>
+<!-- 주소api -->
+<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+<script>
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			ordering : false,
+			lengthChange : false
+		});
+	});
+
+	$(function() {
+		$('#sendBtn').on('click', function() {
+			move();
+		})
+	});
+
+	move = function() {
+		location.href = "review.do";
+	}
+</script>
+
+<style>
+table {
+	width: 40%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+td, th {
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+</style>
+</head>
+
+<body>
+	<div class="bgBox">
+		<div class="concord-img-gradient">
+			<nav id="nav">
+				<dl>
+					<dt>마이페이지</dt>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/main.do">개인정보조회 및 수정</a>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/myMemberShip.do">My 멤버십</a>
+					</dd>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/withdrawal.do">회원 탈퇴</a>
+					</dd>
+				</dl>
+			</nav>
+		</div>
+		<!--     <div class="concord-img-gradient"></div>  -->
+		<div class="main">
+			<form action="<%=request.getContextPath()%>/user/myPage/withdrawal.do"
+				method="post">
+				<div class="titleWrap mb-5">
+					<h2 class="pageTitle pb-3">회원탈퇴</h2>
+				</div>
+				<table class="table" id="myTable">
+					<thead>
+						<tr>
+							<td id="trp">비밀번호</td>
+						</tr>
+						<tr>
+							<td id="trp"><input type="password" name="users_pw"
+								placeholder="패스워드를 입력하세요." value=""></td>
+						</tr>
+						<tr>
+							<td id="trp">탈퇴사유</td>
+						</tr>
+						<tr>
+							<td id="trp"><textarea placeholder="탈퇴사유를 입력하세요!"
+									style="width: 300px; height: 200px;"></textarea></td>
+						</tr>
+					</thead>
+				</table>
+				<input id="wrt" type="submit" class="btn btn-default" value="회원탈퇴">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+<jsp:include page="../../common/footer.jsp" />

@@ -1,0 +1,83 @@
+package kr.or.ddit.admin.affiliateCard.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO;
+import kr.or.ddit.util.SqlMapClientFactory;
+
+public class AdminAffiliateCardDaoImpl implements IAdminAffiliateCardDao {
+	private SqlMapClient smc;
+	private static IAdminAffiliateCardDao cardCmpDao;
+	
+	private AdminAffiliateCardDaoImpl() {
+		if(smc==null) {
+			smc = SqlMapClientFactory.getInstance();
+		}
+	}
+	public static IAdminAffiliateCardDao getInstance() {
+		if(cardCmpDao == null) {
+			cardCmpDao = new AdminAffiliateCardDaoImpl();
+		}
+		return cardCmpDao;	
+	}
+	
+	public List<AdminAffiliateCardVO> getCardCmpAll(){
+		
+		List<AdminAffiliateCardVO> result = new ArrayList<AdminAffiliateCardVO>();
+		try {
+			result =  smc.queryForList("adminCardCmpn.getCardCmpnAll");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	@Override
+	public AdminAffiliateCardVO getCardCmp(String cardCmpnId) {
+		AdminAffiliateCardVO result = new AdminAffiliateCardVO();
+		try {
+			
+			result = (AdminAffiliateCardVO) smc.queryForObject("adminCardCmpn.getCardCmpn", cardCmpnId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
+	public int insertCardCmp(AdminAffiliateCardVO vo) {
+		int result = 0;
+		try {
+			result =  smc.update("adminCardCmpn.insertCardCmpn", vo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
+	public int updateCardCmp(AdminAffiliateCardVO vo) {
+		int result = 0;
+		try {
+			result =  smc.update("adminCardCmpn.updateCardCmpn", vo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
+	public int deleteCardCmp(String cardCmpnId) {
+		int result = 0;
+		try {
+			result =  smc.update("adminCardCmpn.deleteCardCmpn", cardCmpnId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
+}

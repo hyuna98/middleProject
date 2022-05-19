@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="notice">
+	<insert id="insertNotice" parameterClass="noticeVO">
+		INSERT INTO NOTICE
+		(NOTICE_ID, NOTICE_TITLE, NOTICE_RGS_DT, NOTICE_CONTENT, MANAGER_ID)
+		VALUES(notice_seq.nextval, #noticeTitle#, sysdate, #noticeContent#, #managerId#)
+		
+<!-- 		INSERT INTO NOTICE -->
+<!-- 		(NOTICE_ID, NOTICE_TITLE, NOTICE_RGS_DT, NOTICE_CONTENT) -->
+<!-- 		VALUES(notice_seq.nextval, #noticeTitle#, sysdate, #noticeContent#) -->
+	</insert>
+	
+	<update id="updateNotice" parameterClass="noticeVO">
+		UPDATE NOTICE
+		SET NOTICE_TITLE = #noticeTitle#, NOTICE_RGS_DT = sysdate, NOTICE_CONTENT = #noticeContent#
+		WHERE NOTICE_ID = #noticeId#
+	</update>
+	
+	<delete id="deleteNotice" parameterClass="String">
+		DELETE FROM NOTICE WHERE NOTICE_ID = #noticeId#
+	</delete>
+	
+	
+	
+	<resultMap id="noticeMap" class="noticeVO">
+	
+	<result property="noticeId" column="NOTICE_ID"/>
+	<result property="noticeTitle" column="NOTICE_TITLE"/>
+	<result property="noticeContent" column="NOTICE_CONTENT"/>
+	<result property="managerId" column="MANAGER_ID"/>
+	<result property="noticeRgsDate" column="NOTICE_RGS_DT"/>
+	
+	</resultMap>
+	
+	
+	<select id="getNoticeAll" resultMap="noticeMap">
+	SELECT NOTICE_ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_RGS_DT, MANAGER_ID FROM NOTICE
+	</select>
+	
+	
+	
+	<resultMap id="noticeDetailMap" class="noticeVO">
+	
+	<result property="noticeId" column="NOTICE_ID"/>
+	<result property="noticeTitle" column="NOTICE_TITLE"/>
+	<result property="noticeContent" column="NOTICE_CONTENT"/>
+	<result property="managerId" column="MANAGER_ID"/>
+	<result property="noticeRgsDate" column="NOTICE_RGS_DT"/>
+	
+	</resultMap>
+	
+	
+	<select id="getNotice" resultMap="noticeDetailMap">
+	SELECT NOTICE_TITLE, NOTICE_CONTENT, NOTICE_RGS_DT, MANAGER_ID, NOTICE_ID
+	 FROM NOTICE
+		WHERE NOTICE_ID=#noticeId#
+	</select>
+	
+	
+	
+</sqlMap>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="view">
+
+	<select id="getContTitle" parameterClass="String"
+		resultClass="historyVO">
+		select cont_title from view_record
+		where USERS_ID = #userId#
+	</select>
+
+	<insert id="insertView" parameterClass="historyVO">
+		MERGE INTO VIEW_RECORD A
+		USING DUAL ON(A.CONT_TITLE = #cont_title# and A.USERS_ID = #users_id#)
+		WHEN NOT MATCHED THEN
+		INSERT (VIEW_NO, VIEW_DT, USERS_ID, CONT_TITLE)
+		VALUES (RECORD_SEQ.NEXTVAL, sysdate, #users_id#, #cont_title#)
+	</insert>
+
+
+	<select id="getViewRecord" parameterClass="String"
+		resultClass="historyVO">
+		select ROWNUM AS view_no
+		,b.CONT_POSTER as cont_poster
+		,a.CONT_TITLE as cont_title
+		from view_record a
+		join content b
+		on
+		a.cont_title = b.cont_title
+		where VIEW_RECORD_DEL_KEY = '1'
+		and
+		users_id=#users_id#
+	</select>
+
+	<update id="deleteViewRecord" parameterClass="historyVO">
+		UPDATE
+		VIEW_RECORD
+		SET VIEW_RECORD_DEL_DT=SYSDATE, VIEW_RECORD_DEL_KEY = '0'
+		WHERE USERS_ID = #users_id#
+		and cont_title=#cont_title#
+	</update>
+
+
+
+
+
+</sqlMap>

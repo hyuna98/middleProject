@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="qna">
+
+<insert id="insertQna" parameterClass="qnaVO">
+	INSERT INTO QNA
+	(QNA_CODE, QNA_QUESTION, QNA_ANSWER, MANAGER_ID, QNA_RGS_DT)
+	VALUES (QNA_SEQ.NEXTVAL, #qQuestion#, #qAnswer#, #managerId#, SYSDATE)
+</insert>
+
+<update id="updateQna" parameterClass="qnaVO">
+	UPDATE QNA
+	SET QNA_QUESTION = #qQuestion#, QNA_ANSWER = #qAnswer#, QNA_RGS_DT = SYSDATE
+	WHERE QNA_CODE = #qCode#
+</update>
+
+
+<delete id="deleteQna" parameterClass="String">
+	 DELETE FROM QNA WHERE QNA_CODE = #qCode#
+</delete>
+
+
+<resultMap id="qnaMap" class="qnaVO">
+	<result property="qQuestion" column="QNA_QUESTION"/>
+	<result property="qAnswer" column="QNA_ANSWER"/>
+	<result property="qCode" column="QNA_CODE"/>
+</resultMap>
+
+
+<select id="getQnaAll" resultMap="qnaMap">
+SELECT QNA_QUESTION, QNA_ANSWER, QNA_CODE FROM QNA
+</select>
+
+
+
+<!-- pk인 qCode와 일치하는 것들을 가져옴 -->
+<resultMap class="qnaVO" id="QnaDetail">
+	<result property="qQuestion" column="QNA_QUESTION"/>
+	<result property="qAnswer" column="QNA_ANSWER"/>
+	<result property="qCode" column="QNA_CODE"/>
+</resultMap>
+
+<select id="getQnaDetail" resultMap="QnaDetail">
+SELECT QNA_QUESTION, QNA_ANSWER, QNA_CODE
+	FROM QNA
+	WHERE QNA_CODE = #qCode#
+</select>
+
+
+
+
+<resultMap class="qnaVO" id="QnaUpdateDetail">
+	<result property="qQuestion" column="QNA_QUESTION"/>
+	<result property="qAnswer" column="QNA_ANSWER"/>
+ 	<result property="managerId" column="MANAGER_ID"/> 
+	<result property="qCode" column="QNA_CODE"/>
+</resultMap>
+
+
+<select id="getUpdateDetail" resultMap="QnaUpdateDetail">
+SELECT QNA_QUESTION, QNA_ANSWER, MANAGER_ID, QNA_CODE
+FROM QNA
+WHERE QNA_CODE = #qCode#
+</select>
+</sqlMap>

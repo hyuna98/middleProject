@@ -1,0 +1,9 @@
+# SqlMapConfig.properties
+driver=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@112.220.114.130:1521:XE
+username=team3_202110M
+password=java
+
+#\uC11C\uBC84 \uD130\uC9C8\uC2DC \uBC31\uC5C5\uC6A9 \uB514\uBE44-\uBE44\uBC88 \uB3D9\uC77C
+#url=jdbc:oracle:thin:@192.168.1.27:1521:XE
+#username=team3_202110M_sub

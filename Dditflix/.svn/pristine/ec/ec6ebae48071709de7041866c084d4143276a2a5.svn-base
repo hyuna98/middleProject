@@ -1,0 +1,165 @@
+<%@page import="kr.or.ddit.user.downloadPayment.vo.UserDownloadPaymentVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.user.login.vo.LoginVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<%
+	LoginVO lv = (LoginVO) request.getAttribute("lv");
+%>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마이페이이지</title>
+<jsp:include page="../../common/header.jsp" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/favicon.svg">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/comm_sub.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/user/myPage.css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery/jquery-3.6.0.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/js/bootstrap/bootstrap.min.js"></script>
+
+
+
+<script>
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			ordering : false,
+			lengthChange : false
+		});
+	});
+
+	$(function() {
+		$('#sendBtn').on('click', function() {
+			move();
+		})
+	});
+
+	move = function() {
+		location.href = "review.do";
+	}
+
+</script>
+
+<style>
+table {
+	width: 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+td, th {
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+</style>
+</head>
+
+<body>
+	<div class="bgBox">
+		<div class="concord-img-gradient">
+			<nav id="nav">
+				<dl>
+					<dt>마이페이지</dt>
+					<dd>
+						<a class="menuLink"
+							href="<%=request.getContextPath()%>/user/myPage/main.do">개인정보
+							조회 및 수정</a>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/DownPym.do">다운로드 목록</a>
+					</dd>
+					<dd>
+						<a class="menuLink"
+							href="<%=request.getContextPath()%>/user/myPage/wishList.do">찜목록</a>
+					</dd>
+					<dd>
+						<a class="menuLink"
+							href="<%=request.getContextPath()%>/user/myPage/viewRecord.do">시청기록</a>
+					</dd>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myPage/myMemberShip.do">My 멤버십</a>
+					</dd>
+					<dd>
+						<a class="menuLink" href="<%=request.getContextPath()%>/user/myCardInfo/list.do">내 카드 정보</a>
+					</dd>
+					<dd>
+						<a class="menuLink"
+							href="<%=request.getContextPath()%>/user/myPage/withdrawal.do">회원
+							탈퇴</a>
+					</dd>
+				</dl>
+
+			</nav>
+		</div>
+		<!--     <div class="concord-img-gradient"></div>  -->
+		<div class="main">
+			<form action="<%=request.getContextPath()%>/user/myPage/DownPym.do"
+				method="post">
+				<div class="titleWrap mb-5">
+					<h2 class="pageTitle pb-3">다운로드 목록</h2>
+				</div>
+				<table class="table" id="myTable">
+					<thead>
+						<tr>
+							<td id="trp">구매번호</td>
+							<td id="trp">포스터</td>
+							<td id="trp">제목</td>
+							<td id="trp">다운로드 / 삭제</td>
+						</tr>
+						<%
+							List<UserDownloadPaymentVO> list = (List<UserDownloadPaymentVO>)request.getAttribute("list");
+
+							String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
+
+							int listSize = list.size();
+							if (listSize > 0) {
+								for (int i = 0; i < listSize; i++) {
+						%>
+						<tr>
+							<form action="<%=request.getContextPath()%>/user/myPage/DownPym.do" method="post">
+								<th><%=list.get(i).getDwnldPymCartNo()%></th>
+								<td><img class="titleImg"
+									src="<%=list.get(i).getPoster()%>" alt=""></td>
+								<td><%=list.get(i).getContTitle()%></td>
+								<td><button class="btn btn-primary btn-del" type="button"
+										data-idx="<%=i%>" style="background-color: black; border-color: red;">다운로드</button>
+									<button class="btn btn-primary btn-del" type="submit"
+										data-idx="<%=i%>" style="background-color: black; border-color: red;">삭제</button></td>
+								<td><input type="hidden" name="cont_title"
+									value="<%=list.get(i).getContTitle()%>"></td>
+							</form>
+						</tr>
+						<%
+							}
+							} else {
+						%>
+						<tr>
+							<td colspan="100%">결제한 컨텐츠가 없습니다.</td>
+						</tr>
+						<%
+							}
+						%>
+					</thead>
+				</table>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+<jsp:include page="../../common/footer.jsp" />

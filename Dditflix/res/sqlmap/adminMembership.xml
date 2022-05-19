@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="adminMembership">
+
+<resultMap id="membershipMap" class="adminMembershipVO">
+	<result property="mmbrsId" column="MMBRS_ID"/>
+	<result property="mmbrsRating" column="MMBRS_RATING"/>
+	<result property="mmbrsPrice" column="MMBRS_PRICE"/>
+	<result property="mmbrsQualityGrade" column="MMBRS_QUALITY_GRADE"/>
+	<result property="mmbrsMod" column="MMBRS_MOD"/>
+	<result property="mmbrsDelDt" column="MMBRS_DEL_DT"/>
+	<result property="mmbrsDelKey" column="MMBRS_DEL_KEY"/>
+	<result property="mmbrsRgsDt" column="MMBRS_RGS_DT"/>
+	<result property="mmbrsLogo" column="MMBRS_LOGO"/>
+</resultMap>
+
+
+<select id="getMembershipAll" resultMap="membershipMap">
+	select * from MEMBERSHIP
+	order by MMBRS_MOD desc
+</select>
+
+<select id="getMembership" parameterClass="String" resultMap="membershipMap">
+	select * from MEMBERSHIP where MMBRS_ID=#mmbrsId# 
+</select>
+
+<update id="insertMembership" parameterClass="adminMembershipVO">
+	insert into MEMBERSHIP
+	values
+	(
+		MEMBERSHIP_SEQ.NEXTVAL
+		, #mmbrsRating#
+		, #mmbrsPrice#
+		, #mmbrsQualityGrade#
+		, sysdate
+		, NULL
+		, 0
+		, sysdate
+		, #mmbrsLogo#
+	)
+
+</update>
+
+<update id="updateMembership" parameterClass="adminMembershipVO">
+	update MEMBERSHIP
+	set
+	MMBRS_RATING = #mmbrsRating#
+	, MMBRS_PRICE = #mmbrsPrice#
+	, MMBRS_QUALITY_GRADE = #mmbrsQualityGrade#
+	, MMBRS_MOD = SYSDATE
+	, MMBRS_LOGO = #mmbrsLogo#
+	where MMBRS_ID=#mmbrsId# 
+</update>
+
+<update id="deleteMembership" parameterClass="String">
+	DELETE FROM MEMBERSHIP
+	where MMBRS_ID=#mmbrsId# 
+</update>
+
+</sqlMap>

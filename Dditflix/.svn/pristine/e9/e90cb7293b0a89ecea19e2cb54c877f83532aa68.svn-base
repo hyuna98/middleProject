@@ -1,0 +1,71 @@
+package kr.or.ddit.user.myCardInfo.vo;
+
+public class UserMyCardInfoVO {
+	
+	private String cardNo;
+	private String cardName;
+	private String usersId;
+	private String cardCmpnId;
+	private String cardCmpnName;
+	private String representativeCardWt;
+	private String cardRgsDt;
+	private String cardDelKey;
+	private String cardDelDt;
+	
+	public String getCardDelKey() {
+		return cardDelKey;
+	}
+	public void setCardDelKey(String cardDelKey) {
+		this.cardDelKey = cardDelKey;
+	}
+	public String getCardNo() {
+		return cardNo;
+	}
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+	public String getCardName() {
+		return cardName;
+	}
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+	public String getUsersId() {
+		return usersId;
+	}
+	public void setUsersId(String usersId) {
+		this.usersId = usersId;
+	}
+	public String getCardCmpnId() {
+		return cardCmpnId;
+	}
+	public void setCardCmpnId(String cardCmpnId) {
+		this.cardCmpnId = cardCmpnId;
+	}
+	public String getCardCmpnName() {
+		return cardCmpnName;
+	}
+	public void setCardCmpnName(String cardCmpnName) {
+		this.cardCmpnName = cardCmpnName;
+	}
+	public String getRepresentativeCardWt() {
+		return representativeCardWt;
+	}
+	public void setRepresentativeCardWt(String representativeCardWt) {
+		this.representativeCardWt = representativeCardWt;
+	}
+	public String getCardRgsDt() {
+		return cardRgsDt;
+	}
+	public void setCardRgsDt(String cardRgsDt) {
+		this.cardRgsDt = cardRgsDt;
+	}
+	public String getCardDelDt() {
+		return cardDelDt;
+	}
+	public void setCardDelDt(String cardDelDt) {
+		this.cardDelDt = cardDelDt;
+	}
+	
+	
+}

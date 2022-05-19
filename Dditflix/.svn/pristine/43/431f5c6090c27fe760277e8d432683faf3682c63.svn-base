@@ -1,0 +1,42 @@
+package kr.or.ddit.admin.affiliateCard.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.admin.affiliateCard.service.AdminAffiliateCardServiceImpl;
+import kr.or.ddit.admin.affiliateCard.service.IAdminAffiliateCardService;
+import kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO;
+
+@WebServlet("/admin/affiliateCard/list.do")
+public class AdminAffiliateCardListServlet extends HttpServlet {
+	private IAdminAffiliateCardService cardCmpService;
+	
+	public AdminAffiliateCardListServlet() {
+		if(cardCmpService==null) {
+			cardCmpService = AdminAffiliateCardServiceImpl.getInstance();
+		}
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<AdminAffiliateCardVO> list = cardCmpService.getCardCmpAll();
+		
+		request.setAttribute("cardCmpList", list);
+		request.getRequestDispatcher("/WEB-INF/views/admin/affiliateCard/list.jsp").forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+		
+	}
+
+}

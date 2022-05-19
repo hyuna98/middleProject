@@ -1,0 +1,135 @@
+<%@page import="kr.or.ddit.user.myPage.vo.wishListVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.user.login.vo.LoginVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<%
+	LoginVO lv = (LoginVO) request.getAttribute("lv");
+%>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마이페이이지</title>
+<jsp:include page="../../common/header.jsp" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/favicon.svg">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/comm_sub.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/user/myPage.css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery/jquery-3.6.0.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap/bootstrap.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 주소api -->
+
+
+<script>
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			ordering : false,
+			lengthChange : false
+		});
+	});
+
+	$(function() {
+		$('#sendBtn').on('click', function() {
+			move();
+		})
+	});
+
+	move = function() {
+		location.href = "review.do";
+	}
+
+</script>
+
+<style>
+table {
+	width: 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+td, th {
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+</style>
+</head>
+
+<body>
+	<div class="bgBox">
+		<div class="concord-img-gradient"></div>
+		<div class="main">
+			<div class="titleWrap mb-5">
+				<h2 class="pageTitle pb-3">찜목록</h2>
+			</div>
+			<table class="table" id="myTable">
+				<thead>
+					<tr>
+						<td id="trp">순번</td>
+						<td id="trp">포스터</td>
+						<td id="trp">제목</td>
+						<td id="trp">삭제버튼</td>
+					</tr>
+					<tr>
+						<%
+							List<wishListVO> wishList = (List<wishListVO>) request.getAttribute("wishList");
+
+															String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
+
+															int wishSize = wishList.size();
+															if (wishSize > 0) {
+																for (int i = 0; i < wishSize; i++) {
+						%>
+					
+					<tr>
+						<form
+							action="<%=request.getContextPath()%>/user/myPage/wishList.do"
+							method="post">
+							<th><%=wishList.get(i).getWish_no()%></th>
+							<td><img class="titleImg"
+								src="<%=wishList.get(i).getCont_poster()%>" alt=""></td>
+							<td><%=wishList.get(i).getCont_title()%></td>
+							<td><button class="btn btn-primary btn-del" type="button"
+									data-idx="<%=i%>" style="background-color: black; border-color: red;">시청하기</button>
+								<button class="btn btn-primary btn-del" type="submit"
+									data-idx="<%=i%>" style="background-color: black; border-color: red;">삭제</button></td>
+							<td><input type="hidden" name="cont_title"
+								value="<%=wishList.get(i).getCont_title()%>"></td>
+						</form>
+					</tr>
+					<%
+						}
+						} else {
+					%>
+					<tr>
+						<td colspan="100%">찜한 컨텐츠가 없습니다.</td>
+					</tr>
+					<%
+						}
+					%>
+				</thead>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
+
+<jsp:include page="../../common/footer.jsp" />

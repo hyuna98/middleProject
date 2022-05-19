@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="mymembership">
+
+	<select id="getUserMemberShip" parameterClass="String" resultClass="memberShipVO">
+		SELECT
+		b.USERS_NAME
+		,a.MMBRS_RATING
+		,a.MMBRS_QUALITY_GRADE
+		,a.MMBRS_PRICE
+		,a.MMBRS_LOGO
+		FROM MEMBERSHIP a
+		join USERS b
+		ON a.MMBRS_ID
+		= b.MMBRS_ID
+		WHERE USERS_ID = #users_is#
+	</select>
+
+	<select id="getMemberShipList" resultClass="memberShipVO">
+		SELECT 
+		 MMBRS_RATING
+		,MMBRS_PRICE
+		,MMBRS_QUALITY_GRADE
+		,MMBRS_LOGO
+		FROM MEMBERSHIP
+	</select>
+	
+	<select id="getMemberId" parameterClass="String" resultClass="String">
+	SELECT MMBRS_ID
+	  FROM MEMBERSHIP
+	 WHERE MMBRS_RATING=#mmbrs_rating#
+	</select>
+	
+	<update id="insertMemberPayMent" parameterClass="memberShipVO">
+	INSERT INTO mmbrs_pymnt
+            (MMBRS_PYMNT_CODE
+            ,USERS_ID
+            ,MMBRS_RATING
+            ,MMBRS_PYMNT_PRICE) 
+     VALUES (F_MMBRS_PYMNT_NO('now') 
+     		,#users_id#
+     		,#mmbrs_rating#
+     		,#mmbrs_price#)
+	</update>
+	
+	<update id="updateUserMemberShip" parameterClass="memberShipVO">
+	UPDATE USERS 
+       SET USERS_MOD=SYSDATE
+          ,MMBRS_ID=#mmbrs_id#
+     WHERE USERS_ID=#users_id#
+	</update>
+	
+
+</sqlMap>

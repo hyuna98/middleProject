@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="content">
+
+	<select id="movieList" resultClass="conVO" parameterClass="String">
+		SELECT A.CONT_TITLE, 
+		       A.CONT_CAST, 
+		       A.CONT_GENRE, 
+		       A.CONT_DIRECTOR, 
+		       A.CONT_RUNNING_TIME, 
+		       A.CONT_POSTER ,
+		       B.EP_PLOT,
+		       C.VIDEO_FILE_SAVE_PATH,
+		       PR.PRICE_RATING_PRICE
+		  FROM CONTENT A, EPISODE B, VIDEO C, PRICE_RATING PR
+		 WHERE A.CONT_TITLE = B.CONT_TITLE
+		   AND B.CONT_TITLE = C.CONT_TITLE
+		   AND A.PRICE_RATING_ID = PR.PRICE_RATING_ID
+		   AND A.CONT_GENRE = #genre#
+
+	</select>
+	
+	<select id="contentList" resultClass="conVO">
+		SELECT * FROM CONTENT ORDER BY CONT_MOD DESC
+	</select>
+	
+	<select id="tvList" resultClass="conVO" parameterClass="String">
+		SELECT A.CONT_TITLE, 
+		       A.CONT_CAST, 
+		       A.CONT_GENRE, 
+		       A.CONT_DIRECTOR, 
+		       A.CONT_RUNNING_TIME, 
+		       A.CONT_POSTER ,
+		       B.EP_PLOT,
+		       C.VIDEO_FILE_SAVE_PATH,
+		       PR.PRICE_RATING_PRICE
+		  FROM CONTENT A, EPISODE B, VIDEO C, PRICE_RATING PR
+		 WHERE A.CONT_TITLE = B.CONT_TITLE
+		   AND B.CONT_TITLE = C.CONT_TITLE
+		   AND A.PRICE_RATING_ID = PR.PRICE_RATING_ID
+		   AND A.CONT_GENRE = #genre#
+		   
+		   
+	</select>
+	
+	<select id="searchList" resultClass="conVO" parameterClass="String">
+		SELECT A.CONT_TITLE, 
+		       A.CONT_CAST, 
+		       A.CONT_DIRECTOR, 
+		       A.CONT_POSTER ,
+		       B.EP_PLOT,
+		       C.VIDEO_FILE_SAVE_PATH,
+		       PR.PRICE_RATING_PRICE
+		  FROM CONTENT A, EPISODE B, VIDEO C, PRICE_RATING PR
+		 WHERE A.CONT_TITLE = B.CONT_TITLE
+		   AND B.CONT_TITLE = C.CONT_TITLE
+		   AND A.PRICE_RATING_ID = PR.PRICE_RATING_ID
+		   AND A.CONT_TITLE LIKE '%' ||#cont_title#|| '%'
+	</select>
+	
+	
+
+	
+</sqlMap>

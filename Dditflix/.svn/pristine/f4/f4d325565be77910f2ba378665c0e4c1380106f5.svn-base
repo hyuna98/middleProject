@@ -1,0 +1,54 @@
+package kr.or.ddit.admin.affiliateCard.controller;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.admin.affiliateCard.service.AdminAffiliateCardServiceImpl;
+import kr.or.ddit.admin.affiliateCard.service.IAdminAffiliateCardService;
+import kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO;
+
+@WebServlet("/admin/affiliateCard/update.do")
+public class AdminAffiliateCardUpdateServlet extends HttpServlet {
+	private IAdminAffiliateCardService cardCmpService;
+	
+	
+	
+	public AdminAffiliateCardUpdateServlet() {
+		if(cardCmpService==null) {
+			cardCmpService = AdminAffiliateCardServiceImpl.getInstance();
+		}
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String cardCmpnId = request.getParameter("cardCmpnId")==null? "" : request.getParameter("cardCmpnId");
+		AdminAffiliateCardVO vo = cardCmpService.getCardCmp(cardCmpnId);
+		request.setAttribute("affilicateCard", vo);
+		
+		request.getRequestDispatcher("/WEB-INF/views/admin/affiliateCard/update.jsp").forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String cardCmpnId = request.getParameter("cardCmpnId")==null? "" : request.getParameter("cardCmpnId");
+		String cardCmpnName = request.getParameter("cardCmpnName")==null? "" : request.getParameter("cardCmpnName");
+		AdminAffiliateCardVO vo = new AdminAffiliateCardVO();
+		vo.setCardCmpnId(cardCmpnId);
+		vo.setCardCmpnName(cardCmpnName);
+		int cnt = cardCmpService.updateCardCmp(vo);
+		
+		if(cnt > 0) {
+			response.getWriter().print("성공");
+		} else {
+			response.getWriter().print("실패");
+		}
+		
+	}
+
+}

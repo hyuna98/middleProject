@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="user">
+
+	<select id="loginChk" parameterClass="loginVO" resultClass="loginVO">
+		SELECT USERS_ID,
+			   USERS_NAME,
+			   USERS_GENDER,
+		       USERS_BIR,
+			   USERS_HP,
+			   USERS_WITHDRAWAL,
+			   MMBRS_ID,
+			   USERS_TYPE  
+		  FROM USERS
+		 WHERE USERS_ID = #users_id#
+		   AND USERS_PW = #users_pw#
+		   AND USERS_WITHDRAWAL = 1
+	</select>
+	
+	<select id="findID" parameterClass="loginVO" resultClass="String">
+		SELECT USERS_ID
+		  FROM USERS
+		 WHERE USERS_NAME = #users_name#
+		   AND USERS_HP = #users_hp#
+	</select>
+	
+	<select id="findPw" parameterClass="loginVO" resultClass="String">
+		SELECT USERS_PW
+		  FROM USERS
+		 WHERE USERS_ID = #users_id#
+		   AND USERS_EMAIL = #users_mail# 
+	</select>
+	
+	
+
+	
+</sqlMap>

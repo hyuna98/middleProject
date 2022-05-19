@@ -1,0 +1,10 @@
+package kr.or.ddit.admin.content.dao;
+
+import kr.or.ddit.admin.content.vo.AdminContentVO;
+
+public interface IAdminContentDao {
+
+	// 컨텐츠 등록
+	public int insertContent(AdminContentVO vo) throws Exception;
+	
+}

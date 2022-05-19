@@ -1,0 +1,79 @@
+package kr.or.ddit.user.myCardInfo.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.user.downloadPayment.vo.UserDownloadPaymentVO;
+import kr.or.ddit.user.myCardInfo.vo.UserMyCardInfoVO;
+import kr.or.ddit.util.SqlMapClientFactory;
+
+public class UserMyCardInfoDaoImpl implements IUserMyCardInfoDao {
+	
+	private static IUserMyCardInfoDao myCardInfoDao;
+	private SqlMapClient smc;
+
+	private UserMyCardInfoDaoImpl() {
+		if(smc==null) {
+			smc = SqlMapClientFactory.getInstance();
+		}
+	}
+
+	public static IUserMyCardInfoDao getInstance() {
+		if(myCardInfoDao==null) {
+			myCardInfoDao = new UserMyCardInfoDaoImpl();
+		}
+		return myCardInfoDao;
+	}
+
+	@Override
+	public List<UserMyCardInfoVO> getMyCardList(String userId) {
+		List<UserMyCardInfoVO> list = new ArrayList<>();
+		try {
+			list = smc.queryForList("userMyCardInfo.getMyCardList", userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public int insertMyCardInfo(UserMyCardInfoVO vo) {
+		int result = 0;
+		try {
+			result =  smc.update("userMyCardInfo.insertMyCardInfo", vo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteMyCardInfo(String myCardNo) {
+		int result = 0;
+		try {
+			result = smc.update("userMyCardInfo.deleteMyCardInfo", myCardNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int setRepreCard(UserMyCardInfoVO vo) {
+		int result = 0;
+		try {
+			int init = smc.update("userMyCardInfo.initRepre", vo.getUsersId());
+			if(init>=0) {				
+				result = smc.update("userMyCardInfo.setRepreCard", vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
+}

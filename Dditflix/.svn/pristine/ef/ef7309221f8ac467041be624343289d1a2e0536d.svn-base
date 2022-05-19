@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="board">
+
+<insert id="insertBoard" parameterClass="boardVO">
+<!-- 	INSERT INTO REVIEW -->
+<!-- 	(RV_ID, RV_TITLE, RV_CONTENT, RV_dT, USERS_ID, CONT_TITLE) -->
+<!-- 	values (REVIEW_SEQ.NEXTVAL, #rvTitle#, #rvContent#, SYSDATE, #userId#, #contTitle#) -->
+	
+<!-- 	아이디별 영화 제목 불러오기, 현재 로그인 한 아이디 불러오기 -->
+	INSERT INTO REVIEW 
+	(RV_ID, RV_TITLE, CONT_TITLE, RV_DT, RV_CONTENT, USERS_ID) 
+	values (REVIEW_SEQ.NEXTVAL, #rvTitle#, #contTitle#, TO_CHAR(SYSDATE, 'YY-MM-DD'), #rvContent#, #userId#)
+</insert>
+
+<update id="updateBoard" parameterClass="boardVO">
+	UPDATE REVIEW
+	SET RV_TITLE = #rvTitle#, 
+	RV_CONTENT = #rvContent#, 
+	RV_DT = sysdate
+	 WHERE CONT_TITLE = #contTitle# and USERS_ID = #userId#
+</update>
+
+<delete id="deleteBoard" parameterClass="String">
+DELETE 
+  FROM REVIEW 
+ WHERE RV_ID = #rvId#
+</delete>
+
+<resultMap id="boardMap" class="boardVO">
+
+	<result property="rvTitle" column="rv_title"/>
+	<result property="rvContent" column="rv_content"/>
+	<result property="rvDt" column="rv_dt"/>
+	<result property="userId" column="users_id"/>
+	<result property="contTitle" column="cont_title"/>
+	<result property="rvId" column="rv_id"/>
+</resultMap>
+
+
+<select id="getBoardAll" resultMap="boardMap">
+SELECT CONT_TITLE, USERS_ID, RV_TITLE, RV_CONTENT, RV_DT, RV_ID from REVIEW
+</select>
+
+
+<resultMap id="boardDetailMap" class="boardVO">
+
+	<result property="rvTitle" column="rv_title"/>
+	<result property="rvContent" column="rv_content"/>
+	<result property="rvDt" column="rv_dt"/>
+	<result property="userId" column="users_id"/>
+	<result property="contTitle" column="cont_title"/>
+	<result property="rvId" column="rv_id"/>
+</resultMap>
+
+<select id="getBoard" parameterClass="String" resultMap="boardDetailMap">
+SELECT RV_DT, USERS_ID, CONT_TITLE, RV_TITLE, RV_CONTENT, RV_ID
+FROM REVIEW
+WHERE users_id = #userId#
+</select>
+
+<select id="getDetail" parameterClass="boardVO" resultMap="boardDetailMap">
+SELECT RV_DT, USERS_ID, CONT_TITLE, RV_TITLE, RV_CONTENT, RV_ID
+FROM REVIEW
+WHERE CONT_TITLE = #contTitle# and USERS_ID = #userId#
+</select>
+
+
+
+</sqlMap>

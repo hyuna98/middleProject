@@ -1,0 +1,19 @@
+package kr.or.ddit.admin.affiliateCard.service;
+
+import java.util.List;
+
+import kr.or.ddit.admin.affiliateCard.vo.AdminAffiliateCardVO;
+
+public interface IAdminAffiliateCardService {
+
+	List<AdminAffiliateCardVO> getCardCmpAll();
+	
+	AdminAffiliateCardVO getCardCmp(String cardCmpnId);
+
+	int insertCardCmp(AdminAffiliateCardVO vo);
+
+	int updateCardCmp(AdminAffiliateCardVO vo);
+
+	int deleteCardCmp(String cardCmpnId);
+
+}

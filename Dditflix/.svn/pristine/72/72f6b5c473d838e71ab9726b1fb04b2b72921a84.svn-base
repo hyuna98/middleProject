@@ -1,0 +1,27 @@
+package kr.or.ddit.admin.affiliateCard.vo;
+
+public class AdminAffiliateCardVO {
+	private String cardCmpnId;
+	private String cardCmpnName;
+	private String createDt;
+	
+	public String getCardCmpnId() {
+		return cardCmpnId;
+	}
+	public void setCardCmpnId(String cardCmpnId) {
+		this.cardCmpnId = cardCmpnId;
+	}
+	public String getCardCmpnName() {
+		return cardCmpnName;
+	}
+	public void setCardCmpnName(String cardCmpnName) {
+		this.cardCmpnName = cardCmpnName;
+	}
+	public String getCreateDt() {
+		return createDt;
+	}
+	public void setCreateDt(String createDt) {
+		this.createDt = createDt;
+	}
+		
+}
